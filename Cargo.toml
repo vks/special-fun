@@ -3,3 +3,4 @@
 name = "special-fun"
 version = "0.0.1"
 authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
+build = "make -C cephes-double lib"
