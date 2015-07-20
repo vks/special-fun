@@ -1,6 +1,5 @@
 extern crate num;
 
-//#[link(name = "md", kind = "static")]  // should be handled by cargo
 extern "C" {
     /// Regularized incomplete beta function.
     fn incbet(a: f64, b: f64, x: f64) -> f64;
