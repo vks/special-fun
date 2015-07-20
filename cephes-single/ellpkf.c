@@ -111,7 +111,7 @@ float x;
 x = xx;
 if( (x < 0.0) || (x > 1.0) )
 	{
-	mtherr( "ellpkf", DOMAIN );
+	mtherrf( "ellpkf", DOMAIN );
 	return( 0.0 );
 	}
 
@@ -123,7 +123,7 @@ else
 	{
 	if( x == 0.0 )
 		{
-		mtherr( "ellpkf", SING );
+		mtherrf( "ellpkf", SING );
 		return( MAXNUMF );
 		}
 	else

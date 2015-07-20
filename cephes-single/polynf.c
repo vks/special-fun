@@ -121,7 +121,7 @@ pt3 = (float * )malloc(psize); /* used by polmulf */
 /* Report if failure */
 if( (pt1 == NULL) || (pt2 == NULL) || (pt3 == NULL) )
 	{
-	mtherr( "polinif", ERANGE );
+	mtherrf( "polinif", ERANGE );
 	exit(1);
 	}
 #if !ANSIC
@@ -391,7 +391,7 @@ if( a[0] == 0.0 )
 		if( ta[i] != 0.0 )
 			goto nzero;
 		}
-	mtherr( "poldivf", SING );
+	mtherrf( "poldivf", SING );
 	goto done;
 
 nzero:

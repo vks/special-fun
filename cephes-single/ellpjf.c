@@ -91,7 +91,7 @@ m = mm;
 
 if( m < 0.0 || m > 1.0 )
 	{
-	mtherr( "ellpjf", DOMAIN );
+	mtherrf( "ellpjf", DOMAIN );
 	return(-1);
 	}
 if( m < 1.0e-5 )
@@ -133,7 +133,7 @@ while( fabsf( (c[i]/a[i]) ) > MACHEPF )
 	{
 	if( i > 8 )
 		{
-/*		mtherr( "ellpjf", OVERFLOW );*/
+/*		mtherrf( "ellpjf", OVERFLOW );*/
 		break;
 		}
 	ai = a[i];

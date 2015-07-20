@@ -151,12 +151,12 @@ int code;
 y0 = yy0;
 if( y0 <= 0.0 )
 	{
-	mtherr( "ndtrif", DOMAIN );
+	mtherrf( "ndtrif", DOMAIN );
 	return( -MAXNUMF );
 	}
 if( y0 >= 1.0 )
 	{
-	mtherr( "ndtrif", DOMAIN );
+	mtherrf( "ndtrif", DOMAIN );
 	return( MAXNUMF );
 	}
 code = 1;

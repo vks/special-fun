@@ -154,7 +154,7 @@ float v, m;
 m = mm;
 if( (k < 0) || (m <= 0.0) )
 	{
-	mtherr( "pdtrcf", DOMAIN );
+	mtherrf( "pdtrcf", DOMAIN );
 	return( 0.0 );
 	}
 v = k+1;
@@ -176,7 +176,7 @@ float v, m;
 m = mm;
 if( (k < 0) || (m <= 0.0) )
 	{
-	mtherr( "pdtr", DOMAIN );
+	mtherrf( "pdtr", DOMAIN );
 	return( 0.0 );
 	}
 v = k+1;
@@ -197,7 +197,7 @@ float v, y;
 y = yy;
 if( (k < 0) || (y < 0.0) || (y >= 1.0) )
 	{
-	mtherr( "pdtrif", DOMAIN );
+	mtherrf( "pdtrif", DOMAIN );
 	return( 0.0 );
 	}
 v = k+1;

@@ -82,7 +82,7 @@ if( n < 0 )
 
 if( x < 0 )
 	{
-domerr:	mtherr( "expnf", DOMAIN );
+domerr:	mtherrf( "expnf", DOMAIN );
 	return( MAXNUMF );
 	}
 
@@ -93,7 +93,7 @@ if( x == 0.0 )
 	{
 	if( n < 2 )
 		{
-		mtherr( "expnf", SING );
+		mtherrf( "expnf", SING );
 		return( MAXNUMF );
 		}
 	else

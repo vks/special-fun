@@ -92,13 +92,13 @@ x = xx;
 
 if( x > MAXLOGF)
 	{
-	mtherr( "expf", OVERFLOW );
+	mtherrf( "expf", OVERFLOW );
 	return( MAXNUMF );
 	}
 
 if( x < MINLOGF )
 	{
-	mtherr( "expf", UNDERFLOW );
+	mtherrf( "expf", UNDERFLOW );
 	return(0.0);
 	}
 

@@ -286,7 +286,7 @@ if( fabsf(d) < 0.25f )
 
 if( d == 0.0f )
 	{
-	mtherr( "ctanf", OVERFLOW );
+	mtherrf( "ctanf", OVERFLOW );
 	w->r = MAXNUMF;
 	w->i = MAXNUMF;
 	return;
@@ -347,7 +347,7 @@ if( fabsf(d) < 0.25f )
 
 if( d == 0.0f )
 	{
-	mtherr( "ccotf", OVERFLOW );
+	mtherrf( "ccotf", OVERFLOW );
 	w->r = MAXNUMF;
 	w->i = MAXNUMF;
 	return;
@@ -485,7 +485,7 @@ if( y == 0.0f )
 		{
 		w->r = PIO2F;
 		w->i = 0.0f;
-		mtherr( "casinf", DOMAIN );
+		mtherrf( "casinf", DOMAIN );
 		}
 	else
 		{
@@ -674,7 +674,7 @@ w->i = 0.25f*logf(a);
 return;
 
 ovrf:
-mtherr( "catanf", OVERFLOW );
+mtherrf( "catanf", OVERFLOW );
 w->r = MAXNUMF;
 w->i = MAXNUMF;
 }

@@ -139,7 +139,7 @@ float x, y, z;
 x = xx;
 if( x <= 0.0f )
 	{
-	mtherr( "k0f", DOMAIN );
+	mtherrf( "k0f", DOMAIN );
 	return( MAXNUMF );
 	}
 
@@ -169,7 +169,7 @@ float x, y;
 x = xx;
 if( x <= 0.0f )
 	{
-	mtherr( "k0ef", DOMAIN );
+	mtherrf( "k0ef", DOMAIN );
 	return( MAXNUMF );
 	}
 

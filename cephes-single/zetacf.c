@@ -190,7 +190,7 @@ if( x < 0.0 )
 	{
 	if( x < -30.8148 )
 		{
-		mtherr( "zetacf", OVERFLOW );
+		mtherrf( "zetacf", OVERFLOW );
 		return(0.0);
 		}
 	s = 1.0 - x;
@@ -223,7 +223,7 @@ if( x < 1.0 )
 
 if( x == 1.0 )
 	{
-	mtherr( "zetacf", SING );
+	mtherrf( "zetacf", SING );
 	return( MAXNUMF );
 	}
 

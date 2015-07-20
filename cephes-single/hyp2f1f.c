@@ -225,7 +225,7 @@ y = hyt2f1f( a, b, c, x, &err );
 hypdon:
 if( err > ETHRESH )
 	{
-	mtherr( "hyp2f1", PLOSS );
+	mtherrf( "hyp2f1", PLOSS );
 /*	printf( "Estimated err = %.2e\n", err );*/
 	}
 return(y);
@@ -239,7 +239,7 @@ goto hypdon;
 
 /* The alarm exit */
 hypdiv:
-mtherr( "hyp2f1f", OVERFLOW );
+mtherrf( "hyp2f1f", OVERFLOW );
 return( MAXNUMF );
 }
 

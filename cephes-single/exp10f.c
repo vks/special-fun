@@ -85,13 +85,13 @@ short n;
 x = xx;
 if( x > MAXL10 )
 	{
-	mtherr( "exp10f", OVERFLOW );
+	mtherrf( "exp10f", OVERFLOW );
 	return( MAXNUMF );
 	}
 
 if( x < -MAXL10 )	/* Would like to use MINLOG but can't */
 	{
-	mtherr( "exp10f", UNDERFLOW );
+	mtherrf( "exp10f", UNDERFLOW );
 	return(0.0);
 	}
 

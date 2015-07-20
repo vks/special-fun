@@ -153,7 +153,7 @@ for( i=0; i<20; i++ )
 if( x0 == 0.0 )
 	{
 under:
-	mtherr( "incbif", UNDERFLOW );
+	mtherrf( "incbif", UNDERFLOW );
 	goto done;
 	}
 

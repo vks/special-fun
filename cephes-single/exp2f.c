@@ -87,13 +87,13 @@ int i0;
 x = xx;
 if( x > MAXL2)
 	{
-	mtherr( fname, OVERFLOW );
+	mtherrf( fname, OVERFLOW );
 	return( MAXNUMF );
 	}
 
 if( x < MINL2 )
 	{
-	mtherr( fname, UNDERFLOW );
+	mtherrf( fname, UNDERFLOW );
 	return(0.0);
 	}
 

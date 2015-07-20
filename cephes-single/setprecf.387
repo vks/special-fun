@@ -1,11 +1,11 @@
 /* Set 80387 floating point hardware rounding precision */
 
-	.file	"setprec.387"
+	.file	"setprecf.387"
 .text
 	.align 2
 
-.globl _sprec
-_sprec:
+.globl _sprecf
+_sprecf:
 	pushl %ebp
 	movl %esp,%ebp
 	pushl %eax
@@ -23,8 +23,8 @@ _sprec:
 
 	.align 2
 
-.globl _dprec
-_dprec:
+.globl _dprecf
+_dprecf:
 	pushl %ebp
 	movl %esp,%ebp
 	pushl %eax
@@ -45,8 +45,8 @@ _dprec:
 
 	.align 2
 
-.globl _ldprec
-_ldprec:
+.globl _ldprecf
+_ldprecf:
 	pushl %ebp
 	movl %esp,%ebp
 	pushl %eax

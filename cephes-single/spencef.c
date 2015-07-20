@@ -92,7 +92,7 @@ int flag;
 x = xx;
 if( x < 0.0 )
 	{
-	mtherr( "spencef", DOMAIN );
+	mtherrf( "spencef", DOMAIN );
 	return(0.0);
 	}
 

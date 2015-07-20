@@ -76,7 +76,7 @@ if( (xx <= 0.0) || ( xx >= 1.0) )
 		return(0.0);
 	if( xx == 1.0 )
 		return( 1.0 );
-	mtherr( "incbet", DOMAIN );
+	mtherrf( "incbet", DOMAIN );
 	return( 0.0 );
 	}
 
@@ -148,7 +148,7 @@ if( t < MINLOG )
 	{
 	if( flag == 0 )
 		{
-		mtherr( "incbet", UNDERFLOW );
+		mtherrf( "incbet", UNDERFLOW );
 		return( 0.0 );
 		}
 	else

@@ -173,7 +173,7 @@ if( k < 0 )
 if( n < k )
 	{
 domerr:
-	mtherr( "bdtrcf", DOMAIN );
+	mtherrf( "bdtrcf", DOMAIN );
 	return( 0.0 );
 	}
 
@@ -210,7 +210,7 @@ if( (p < 0.0) || (p > 1.0) )
 if( (k < 0) || (n < k) )
 	{
 domerr:
-	mtherr( "bdtrf", DOMAIN );
+	mtherrf( "bdtrf", DOMAIN );
 	return( 0.0 );
 	}
 
@@ -247,7 +247,7 @@ if( (y < 0.0) || (y > 1.0) )
 if( (k < 0) || (n <= k) )
 	{
 domerr:
-	mtherr( "bdtrif", DOMAIN );
+	mtherrf( "bdtrif", DOMAIN );
 	return( 0.0 );
 	}
 

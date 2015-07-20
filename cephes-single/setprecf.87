@@ -47,8 +47,8 @@ _DATA ENDS
 
 _TEXT SEGMENT
 ; Set coprocessor to single precision float
-	PUBLIC	_sprec
-_sprec	PROC NEAR
+	PUBLIC	_sprecf
+_sprecf	PROC NEAR
 	fclex
 	fwait
 	finit
@@ -56,11 +56,11 @@ _sprec	PROC NEAR
 	fldcw word ptr ctls
 	fwait
 	ret
-_sprec ENDP
+_sprecf ENDP
 
 ; set coprocessor to long double precision
-	PUBLIC	_ldprec
-_ldprec PROC NEAR
+	PUBLIC	_ldprecf
+_ldprecf PROC NEAR
 	fclex
 	fwait
 	finit
@@ -68,11 +68,11 @@ _ldprec PROC NEAR
 	fldcw word ptr ctlld
 	fwait
 	ret
-_ldprec ENDP
+_ldprecf ENDP
 
 ; set coprocessor to double precision
-	PUBLIC	_dprec
-_dprec PROC NEAR
+	PUBLIC	_dprecf
+_dprecf PROC NEAR
 	fclex
 	fwait
 	finit
@@ -80,7 +80,7 @@ _dprec PROC NEAR
 	fldcw word ptr ctld
 	fwait
 	ret
-_dprec ENDP
+_dprecf ENDP
 
 
 ; get a double promoted to long double size

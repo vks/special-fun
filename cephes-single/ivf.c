@@ -92,7 +92,7 @@ if( x < 0.0 )
 	{
 	if( t != v )
 		{
-		mtherr( "ivf", DOMAIN );
+		mtherrf( "ivf", DOMAIN );
 		return( 0.0 );
 		}
 	if( v != 2.0 * floorf(v/2.0) )
@@ -106,7 +106,7 @@ if( x == 0.0 )
 		return( 1.0 );
 	if( v < 0.0 )
 		{
-		mtherr( "ivf", OVERFLOW );
+		mtherrf( "ivf", OVERFLOW );
 		return( MAXNUMF );
 		}
 	else

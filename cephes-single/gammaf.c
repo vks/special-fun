@@ -210,7 +210,7 @@ if( x < 0.0 )
 	if( nz == 0.0 )
 		{
 goverf:
-		mtherr( "gamma", OVERFLOW );
+		mtherrf( "gamma", OVERFLOW );
 		return( sgngamf * MAXNUMF);
 		}
 	if( nz < 0 )
@@ -268,7 +268,7 @@ return(p);
 small:
 if( x == 0.0 )
 	{
-	mtherr( "gamma", SING );
+	mtherrf( "gamma", SING );
 	return( MAXNUMF );
 	}
 else
@@ -417,7 +417,7 @@ contz:
 if( x > MAXLGM )
 	{
 loverf:
-	mtherr( "lgamf", OVERFLOW );
+	mtherrf( "lgamf", OVERFLOW );
 	return( sgngamf * MAXNUMF );
 	}
 

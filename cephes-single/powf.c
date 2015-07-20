@@ -188,7 +188,7 @@ if( x <= 0.0F )
 		{
 		if( w != y )
 			{ /* noninteger power of negative number */
-			mtherr( fname, DOMAIN );
+			mtherrf( fname, DOMAIN );
 			return(0.0);
 			}
 		nflg = 1;
@@ -280,13 +280,13 @@ w = 16 * (Ga + Ha);
 /* Test the power of 2 for overflow */
 if( w > MEXP )
 	{
-	mtherr( fname, OVERFLOW );
+	mtherrf( fname, OVERFLOW );
 	return( MAXNUMF );
 	}
 
 if( w < MNEXP )
 	{
-	mtherr( fname, UNDERFLOW );
+	mtherrf( fname, UNDERFLOW );
 	return( 0.0 );
 	}
 

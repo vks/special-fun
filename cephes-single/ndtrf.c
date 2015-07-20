@@ -245,7 +245,7 @@ z = -a * a;
 if( z < -MAXLOGF )
 	{
 under:
-	mtherr( "erfcf", UNDERFLOW );
+	mtherrf( "erfcf", UNDERFLOW );
 	if( a < 0 )
 		return( 2.0 );
 	else

@@ -73,7 +73,7 @@ if( z >= 1.0 )
 		return( MAXNUMF );
 	if( x == -1.0 )
 		return( -MAXNUMF );
-	mtherr( "atanhl", DOMAIN );
+	mtherrf( "atanhl", DOMAIN );
 	return( MAXNUMF );
 	}
 

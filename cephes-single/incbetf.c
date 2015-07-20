@@ -102,7 +102,7 @@ if( (xx <= 0.0) || ( xx >= 1.0) )
 		return(0.0);
 	if( xx == 1.0 )
 		return( 1.0 );
-	mtherr( "incbetf", DOMAIN );
+	mtherrf( "incbetf", DOMAIN );
 	return( 0.0 );
 	}
 
@@ -185,7 +185,7 @@ if( t < MINLOGF )
 	t = 0.0;
 	if( flag == 0 )
 		{
-		mtherr( "incbetf", UNDERFLOW );
+		mtherrf( "incbetf", UNDERFLOW );
 		}
 	}
 else
@@ -434,7 +434,7 @@ while( fabsf(u) > MACHEPF );
 
 if( y < MINLOGF )
 	{
-	mtherr( "incbetf", UNDERFLOW );
+	mtherrf( "incbetf", UNDERFLOW );
 	s = 0.0;
 	}
 else

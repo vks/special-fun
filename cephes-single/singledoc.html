@@ -100,7 +100,7 @@ For other precisions, see the archives and descriptions listed above.
 <LI><A HREF="#log10">log10f, Common logarithm</A>
 <LI><A HREF="#log2">log2f, Base 2 logarithm</A>
 <LI><A HREF="#log">logf, Natural logarithm</A>
-<LI><A HREF="#mtherr">mtherrf, Library common error handling routine</A>
+<LI><A HREF="#mtherrf">mtherrff, Library common error handling routine</A>
 <LI><A HREF="#nbdtr">nbdtrf, Negative binomial distribution</A>
 <LI><A HREF="#nbdtrc">nbdtrcf, Complemented negative binomial distribution</A>
 <LI><A HREF="#ndtr">ndtrf, Normal distribution function</A>
@@ -3504,9 +3504,9 @@ For other precisions, see the archives and descriptions listed above.
  * logf domain:       x &lt; 0; returns MINLOG
  */
 </PRE>
-<A NAME="mtherr">&nbsp;</A>
+<A NAME="mtherrf">&nbsp;</A>
 <PRE>
-/*							mtherr.c
+/*							mtherrf.c
  *
  *	Library common error handling routine
  *
@@ -3516,9 +3516,9 @@ For other precisions, see the archives and descriptions listed above.
  *
  * char *fctnam;
  * int code;
- * void mtherr();
+ * void mtherrf();
  *
- * mtherr( fctnam, code );
+ * mtherrf( fctnam, code );
  *
  *
  *

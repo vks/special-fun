@@ -13,7 +13,7 @@
  * DESCRIPTION:
  *
  * This file contains definitions for error codes that are
- * passed to the common error handling routine mtherr()
+ * passed to the common error handling routine mtherrf()
  * (which see).
  *
  * The file also includes a conditional assembly definition
@@ -168,8 +168,8 @@ typedef struct
 #define ANSIPROT
 #include "protos.h"
 #else
-int mtherr();
+int mtherrf();
 #endif
 
-/* Variable for error reporting.  See mtherr.c.  */
+/* Variable for error reporting.  See mtherrf.c.  */
 extern int merror;

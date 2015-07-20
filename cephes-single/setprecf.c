@@ -1,10 +1,10 @@
 /* Null stubs for coprocessor precision settings */
 
 int
-sprec() {return 0; }
+sprecf() {return 0; }
 
 int
-dprec() {return 0; }
+dprecf() {return 0; }
 
 int
-ldprec() {return 0; }
+ldprecf() {return 0; }

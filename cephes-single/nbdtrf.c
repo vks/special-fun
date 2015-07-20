@@ -117,7 +117,7 @@ if( (p < 0.0) || (p > 1.0) )
 if( k < 0 )
 	{
 domerr:
-	mtherr( "nbdtrf", DOMAIN );
+	mtherrf( "nbdtrf", DOMAIN );
 	return( 0.0 );
 	}
 
@@ -144,7 +144,7 @@ if( (p < 0.0) || (p > 1.0) )
 if( k < 0 )
 	{
 domerr:
-	mtherr( "nbdtrf", DOMAIN );
+	mtherrf( "nbdtrf", DOMAIN );
 	return( 0.0 );
 	}
 dk = k+1;

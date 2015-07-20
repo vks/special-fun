@@ -173,7 +173,7 @@ float x, a, b, w;
 x = xx;
 if( (ia < 1) || (ib < 1) || (x < 0.0) )
 	{
-	mtherr( "fdtrcf", DOMAIN );
+	mtherrf( "fdtrcf", DOMAIN );
 	return( 0.0 );
 	}
 a = ia;
@@ -197,7 +197,7 @@ float x, a, b, w;
 x = xx;
 if( (ia < 1) || (ib < 1) || (x < 0.0) )
 	{
-	mtherr( "fdtrf", DOMAIN );
+	mtherrf( "fdtrf", DOMAIN );
 	return( 0.0 );
 	}
 a = ia;
@@ -221,7 +221,7 @@ float y, a, b, w, x;
 y = yy;
 if( (ia < 1) || (ib < 1) || (y <= 0.0) || (y > 1.0) )
 	{
-	mtherr( "fdtrif", DOMAIN );
+	mtherrf( "fdtrif", DOMAIN );
 	return( 0.0 );
 	}
 a = ia;

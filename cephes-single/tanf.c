@@ -121,9 +121,9 @@ else
 if( x > lossth )
 	{
 	if( cotflg )
-		mtherr( "cotf", TLOSS );
+		mtherrf( "cotf", TLOSS );
 	else
-		mtherr( "tanf", TLOSS );
+		mtherrf( "tanf", TLOSS );
 	return(0.0);
 	}
 
@@ -200,7 +200,7 @@ double x;
 
 if( x == 0.0 )
 	{
-	mtherr( "cotf", SING );
+	mtherrf( "cotf", SING );
 	return( MAXNUMF );
 	}
 return( tancotf(x,1) );

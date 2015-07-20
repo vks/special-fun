@@ -116,9 +116,9 @@ else
 if( x > T24M1 )
 	{
 	if( cotflg )
-		mtherr( "cotdgf", TLOSS );
+		mtherrf( "cotdgf", TLOSS );
 	else
-		mtherr( "tandgf", TLOSS );
+		mtherrf( "tandgf", TLOSS );
 	return(0.0);
 	}
 
@@ -167,7 +167,7 @@ if( j & 2 )
 			}
 		else
 			{
-			mtherr( "tandgf", SING );
+			mtherrf( "tandgf", SING );
 			y = MAXNUMF;
 			}
 		}
@@ -180,7 +180,7 @@ else
 			y = 1.0/y;
 		else
 			{
-			mtherr( "cotdgf", SING );
+			mtherrf( "cotdgf", SING );
 			y = MAXNUMF;
 			}
 		}
@@ -214,7 +214,7 @@ double x;
 
 if( x == 0.0 )
 	{
-	mtherr( "cotdgf", SING );
+	mtherrf( "cotdgf", SING );
 	return( MAXNUMF );
 	}
 return( tancotf(x,1) );

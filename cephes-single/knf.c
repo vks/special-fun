@@ -112,16 +112,16 @@ else
 if( n > MAXFAC )
 	{
 overf:
-	mtherr( "knf", OVERFLOW );
+	mtherrf( "knf", OVERFLOW );
 	return( MAXNUMF );
 	}
 
 if( x <= 0.0 )
 	{
 	if( x < 0.0 )
-		mtherr( "knf", DOMAIN );
+		mtherrf( "knf", DOMAIN );
 	else
-		mtherr( "knf", SING );
+		mtherrf( "knf", SING );
 	return( MAXNUMF );
 	}
 
@@ -225,7 +225,7 @@ asymp:
 
 if( x > MAXLOGF )
 	{
-	mtherr( "knf", UNDERFLOW );
+	mtherrf( "knf", UNDERFLOW );
 	return(0.0);
 	}
 k = n;

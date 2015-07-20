@@ -147,7 +147,7 @@ if( y < 1.0f )
 		{
 		c->r = MAXNUMF;
 		c->i = MAXNUMF;
-		mtherr( "cdivf", OVERFLOW );
+		mtherrf( "cdivf", OVERFLOW );
 		return;
 		}
 	}
@@ -287,7 +287,7 @@ ey = e + ey;
 /* Check it for overflow and underflow. */
 if( ey > MAXEXPF )
 	{
-	mtherr( "cabsf", OVERFLOW );
+	mtherrf( "cabsf", OVERFLOW );
 	return( MAXNUMF );
 	}
 if( ey < -MAXEXPF )

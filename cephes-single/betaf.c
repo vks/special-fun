@@ -102,7 +102,7 @@ if( fabsf(y) > MAXGAM )
 	if( y > MAXLOGF )
 		{
 over:
-		mtherr( "betaf", OVERFLOW );
+		mtherrf( "betaf", OVERFLOW );
 		return( sign * MAXNUMF );
 		}
 	return( sign * expf(y) );

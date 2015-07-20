@@ -68,7 +68,7 @@ else
 
 if( z > MAXLOGF )
 	{
-	mtherr( "sinhf", DOMAIN );
+	mtherrf( "sinhf", DOMAIN );
 	if( x > 0 )
 		return( MAXNUMF );
 	else

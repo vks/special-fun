@@ -45,7 +45,7 @@ float tanhf(), atanhf(), sinhf(), asinhf(), coshf(), acoshf();
 #define fabsf(x) ((x) < 0 ? -(x) : (x))
 
 #if SETPREC
-int sprec();
+int sprecf();
 #endif
 
 int drand();
@@ -212,7 +212,7 @@ int i, k, itst, ntsts, iargs;
 int m, ntr;
 
 #if SETPREC
-sprec();  /* set coprocessor precision */
+sprecf();  /* set coprocessor precision */
 #endif
 ntr = NTRIALS;
 printf( "Consistency test of math functions.\n" );

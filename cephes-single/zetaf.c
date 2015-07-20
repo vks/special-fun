@@ -112,7 +112,7 @@ if( x == 1.0 )
 
 if( x < 1.0 )
 	{
-	mtherr( "zetaf", DOMAIN );
+	mtherrf( "zetaf", DOMAIN );
 	return(0.0);
 	}
 

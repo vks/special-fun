@@ -93,9 +93,9 @@ x = xx;
 if( x <= 0.0 )
 	{
 	if( x == 0.0 )
-		mtherr( fname, SING );
+		mtherrf( fname, SING );
 	else
-		mtherr( fname, DOMAIN );
+		mtherrf( fname, DOMAIN );
 	return( -MAXL10 );
 	}
 

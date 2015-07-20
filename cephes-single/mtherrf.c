@@ -1,4 +1,4 @@
-/*							mtherr.c
+/*							mtherrf.c
  *
  *	Library common error handling routine
  *
@@ -8,9 +8,9 @@
  *
  * char *fctnam;
  * int code;
- * void mtherr();
+ * void mtherrf();
  *
- * mtherr( fctnam, code );
+ * mtherrf( fctnam, code );
  *
  *
  *
@@ -73,7 +73,7 @@ static char *ermsg[7] = {
 
 void printf();
 
-int mtherr( name, code )
+int mtherrf( name, code )
 char *name;
 int code;
 {

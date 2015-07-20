@@ -104,7 +104,7 @@ if( (x <= 0.0) || (x > 1.0) )
 	{
 	if( x == 0.0 )
 		return( 1.0 );
-	mtherr( "ellpef", DOMAIN );
+	mtherrf( "ellpef", DOMAIN );
 	return( 0.0 );
 	}
 return( polevlf(x,P,10) - logf(x) * (x * polevlf(x,Q,9)) );

@@ -113,7 +113,7 @@ if( xx < 0 )
 	}
 if( x > T24M1 )
 	{
-	mtherr( "sindgf", TLOSS );
+	mtherrf( "sindgf", TLOSS );
 	return(0.0);
 	}
 j = 0.022222222222222222222 * x; /* integer part of x/45 */
@@ -193,7 +193,7 @@ if( x < 0 )
 
 if( x > T24M1 )
 	{
-	mtherr( "cosdgf", TLOSS );
+	mtherrf( "cosdgf", TLOSS );
 	return(0.0);
 	}
 

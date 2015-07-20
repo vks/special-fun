@@ -22,7 +22,7 @@ log10f.o nbdtrf.o ndtrf.o ndtrif.o pdtrf.o polynf.o \
 powif.o powf.o psif.o rgammaf.o shichif.o sicif.o \
 sindgf.o sinf.o sinhf.o spencef.o sqrtf.o stdtrf.o \
 struvef.o tandgf.o tanf.o tanhf.o ynf.o zetaf.o \
-zetacf.o polevlf.o setprec.o mtherr.o
+zetacf.o polevlf.o setprecf.o mtherrf.o
 
 OBJS = $(addprefix $(OUT_DIR)/,$(OBJ))
 

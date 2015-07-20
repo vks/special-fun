@@ -79,9 +79,9 @@ fe = 0.0;
 if( x <= 0.0 )
 	{
 	if( x == 0.0 )
-		mtherr( "logf", SING );
+		mtherrf( "logf", SING );
 	else
-		mtherr( "logf", DOMAIN );
+		mtherrf( "logf", DOMAIN );
 	return( MINLOGF );
 	}
 

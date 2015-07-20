@@ -84,7 +84,7 @@ int sign;
 x = xx;
 if( x > 34.84425627277176174)
 	{
-	mtherr( name, UNDERFLOW );
+	mtherrf( name, UNDERFLOW );
 	return(1.0/MAXNUMF);
 	}
 if( x < -34.034 )
@@ -104,12 +104,12 @@ if( x < -34.034 )
 	y = logf( w * z / PIF ) + lgamf(w);
 	if( y < -MAXLOGF )
 		{
-		mtherr( name, UNDERFLOW );
+		mtherrf( name, UNDERFLOW );
 		return( sign * 1.0 / MAXNUMF );
 		}
 	if( y > MAXLOGF )
 		{
-		mtherr( name, OVERFLOW );
+		mtherrf( name, OVERFLOW );
 		return( sign * MAXNUMF );
 		}
 	return( sign * expf(y));

@@ -5,8 +5,8 @@
 .text
 	.align 16
 
-.globl sprec
-sprec:
+.globl sprecf
+sprecf:
 	pushl %ebp
 	movl %esp,%ebp
 	pushl %eax
@@ -22,11 +22,11 @@ sprec:
 	leave
 	ret
 .Lfe1:
-	.size	sprec,.Lfe1-sprec
+	.size	sprecf,.Lfe1-sprecf
 	.align 16
 
-.globl dprec
-dprec:
+.globl dprecf
+dprecf:
 	pushl %ebp
 	movl %esp,%ebp
 	pushl %eax
@@ -45,11 +45,11 @@ dprec:
 	leave
 	ret
 .Lfe2:
-	.size	dprec,.Lfe2-dprec
+	.size	dprecf,.Lfe2-dprecf
 	.align 16
 
-.globl ldprec
-ldprec:
+.globl ldprecf
+ldprecf:
 	pushl %ebp
 	movl %esp,%ebp
 	pushl %eax
@@ -65,7 +65,7 @@ ldprec:
 	leave
 	ret
 .Lfe3:
-	.size	ldprec,.Lfe3-ldprec
+	.size	ldprecf,.Lfe3-ldprecf
 
 	.align 16
 .globl getprec

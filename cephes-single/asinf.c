@@ -125,7 +125,7 @@ else
 
 if( a > 1.0 )
 	{
-	mtherr( "asinf", DOMAIN );
+	mtherrf( "asinf", DOMAIN );
 	return( 0.0 );
 	}
 
@@ -186,7 +186,7 @@ if( x < -0.5)
 
 if( x > 1.0 )
 	{
-domerr:	mtherr( "acosf", DOMAIN );
+domerr:	mtherrf( "acosf", DOMAIN );
 	return( 0.0 );
 	}
 

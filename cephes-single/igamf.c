@@ -130,7 +130,7 @@ if( (x < 1.0) || (x < a) )
 ax = a * logf(x) - x - lgamf(a);
 if( ax < -MAXLOGF )
 	{
-	mtherr( "igamcf", UNDERFLOW );
+	mtherrf( "igamcf", UNDERFLOW );
 	return( 0.0 );
 	}
 ax = expf(ax);
@@ -211,7 +211,7 @@ if( (x > 1.0) && (x > a ) )
 ax = a * logf(x) - x - lgamf(a);
 if( ax < -MAXLOGF )
 	{
-	mtherr( "igamf", UNDERFLOW );
+	mtherrf( "igamf", UNDERFLOW );
 	return( 0.0 );
 	}
 ax = expf(ax);

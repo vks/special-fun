@@ -81,7 +81,7 @@ int j;
 t = tt;
 if( k <= 0 )
 	{
-	mtherr( "stdtrf", DOMAIN );
+	mtherrf( "stdtrf", DOMAIN );
 	return(0.0);
 	}
 

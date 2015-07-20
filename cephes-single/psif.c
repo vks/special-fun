@@ -99,7 +99,7 @@ if( x <= 0.0 )
 	p = floorf(q);
 	if( p == q )
 		{
-		mtherr( "psif", SING );
+		mtherrf( "psif", SING );
 		return( MAXNUMF );
 		}
 	nz = q - p;

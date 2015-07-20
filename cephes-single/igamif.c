@@ -78,7 +78,7 @@ float a, y0, d, y, x0, lgm;
 int i;
 
 if( yy0 > 0.5)
-	mtherr( "igamif", PLOSS );
+	mtherrf( "igamif", PLOSS );
 
 a = aa;
 y0 = yy0;
@@ -93,7 +93,7 @@ for( i=0; i<10; i++ )
 	{
 	if( x0 <= 0.0 )
 		{
-		mtherr( "igamif", UNDERFLOW );
+		mtherrf( "igamif", UNDERFLOW );
 		return(0.0);
 		}
 	y = igamcf(a,x0);
@@ -101,7 +101,7 @@ for( i=0; i<10; i++ )
 	d = (a - 1.0) * logf(x0) - x0 - lgm;
 	if( d < -MAXLOGF )
 		{
-		mtherr( "igamif", UNDERFLOW );
+		mtherrf( "igamif", UNDERFLOW );
 		goto done;
 		}
 	d = -expf(d);

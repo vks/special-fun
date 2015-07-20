@@ -115,7 +115,7 @@ else
 
 if( s > MAXLOGF )
 	{
-	mtherr( "powi", OVERFLOW );
+	mtherrf( "powi", OVERFLOW );
 	y = MAXNUMF;
 	goto done;
 	}

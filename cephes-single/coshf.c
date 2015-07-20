@@ -65,7 +65,7 @@ if( x < 0 )
 	x = -x;
 if( x > MAXLOGF )
 	{
-	mtherr( "coshf", OVERFLOW );
+	mtherrf( "coshf", OVERFLOW );
 	return( MAXNUMF );
 	}	
 y = expf(x);

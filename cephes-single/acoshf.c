@@ -77,7 +77,7 @@ float x, z;
 x = xx;
 if( x < 1.0 )
 	{
-	mtherr( "acoshf", DOMAIN );
+	mtherrf( "acoshf", DOMAIN );
 	return(0.0);
 	}
 

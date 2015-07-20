@@ -219,7 +219,7 @@ if( x <= 2.0f )
 	{
 	if( x <= 0.0f )
 		{
-		mtherr( "y0f", DOMAIN );
+		mtherrf( "y0f", DOMAIN );
 		return( -MAXNUMF );
 		}
 	z = x * x;

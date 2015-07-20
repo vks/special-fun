@@ -91,13 +91,13 @@ int i;
 
 if( i < 0 )
 	{
-	mtherr( "facf", SING );
+	mtherrf( "facf", SING );
 	return( MAXNUMF );
 	}
 
 if( i > MAXFACF )
 	{
-	mtherr( "facf", OVERFLOW );
+	mtherrf( "facf", OVERFLOW );
 	return( MAXNUMF );
 	}
 

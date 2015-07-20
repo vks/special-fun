@@ -117,7 +117,7 @@ if( acanc < pcanc )
 
 done:
 if( pcanc > 1.0e-3 )
-	mtherr( "hyperg", PLOSS );
+	mtherrf( "hyperg", PLOSS );
 
 return( psum );
 }
@@ -156,7 +156,7 @@ while( t > MACHEPF )
 	{
 	if( bn == 0 )			/* check bn first since if both	*/
 		{
-		mtherr( "hypergf", SING );
+		mtherrf( "hypergf", SING );
 		return( MAXNUMF );	/* an and bn are zero it is	*/
 		}
 	if( an == 0 )			/* a singularity		*/
@@ -403,6 +403,6 @@ return( sum );
 /* series blew up: */
 error:
 *err = MAXNUMF;
-mtherr( "hypergf", TLOSS );
+mtherrf( "hypergf", TLOSS );
 return( sum );
 }

@@ -78,7 +78,7 @@ f = xx;
 if( f <= 0.0 )
 	{
 	if( f < 0.0 )
-		mtherr( "sqrtf", DOMAIN );
+		mtherrf( "sqrtf", DOMAIN );
 	return( 0.0 );
 	}
 

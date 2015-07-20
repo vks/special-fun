@@ -125,7 +125,7 @@ x = xx;
 
 if( x < 0.0 )
 	{
-	mtherr( "gdtrf", DOMAIN );
+	mtherrf( "gdtrf", DOMAIN );
 	return( 0.0 );
 	}
 return(  igamf( b, a * x )  );
@@ -147,7 +147,7 @@ b = bb;
 x = xx;
 if( x < 0.0 )
 	{
-	mtherr( "gdtrcf", DOMAIN );
+	mtherrf( "gdtrcf", DOMAIN );
 	return( 0.0 );
 	}
 return(  igamcf( b, a * x )  );

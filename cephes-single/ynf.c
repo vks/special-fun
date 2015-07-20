@@ -92,7 +92,7 @@ if( n == 1 )
 /* test for overflow */
 if( x <= 0.0 )
 	{
-	mtherr( "ynf", SING );
+	mtherrf( "ynf", SING );
 	return( -MAXNUMF );
 	}
 if( (x < 1.0) || (n > 29) )
@@ -101,7 +101,7 @@ if( (x < 1.0) || (n > 29) )
 	r = an * logf( an/x );
 	if( r > MAXLOGF )
 		{
-		mtherr( "ynf", OVERFLOW );
+		mtherrf( "ynf", OVERFLOW );
 		return( -MAXNUMF );
 		}
 	}

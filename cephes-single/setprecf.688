@@ -14,22 +14,22 @@
 .text
 
 /* set to single precision */
-.globl _sprec
-_sprec
+.globl _sprecf
+_sprecf
 	.word 0xf23c,0x9000,0x0000,0x0040
 	rts
 
 /* set to double precision */
-.globl _dprec
+.globl _dprecf
 
-_dprec:
+_dprecf:
 	.word	0xf23c,0x9000,0x0000,0x0080
 	rts
 
 /* set to extended (long double) precision */
-.globl _ldprec
+.globl _ldprecf
 
-_ldprec:
+_ldprecf:
 	.word	0xf23c,0x9000,0x0000,0x0000
 	rts
 

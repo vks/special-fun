@@ -119,7 +119,7 @@ if( y == an )
 
 if( (x < 0.0) && (y != an) )
 	{
-	mtherr( "jvf", DOMAIN );
+	mtherrf( "jvf", DOMAIN );
 	y = 0.0;
 	goto done;
 	}
@@ -241,7 +241,7 @@ else
  */
 	if( n < 0.0 )
 		{
-		mtherr( "jvf", TLOSS );
+		mtherrf( "jvf", TLOSS );
 		y = 0.0;
 		goto done;
 		}
@@ -455,7 +455,7 @@ else
 		t = logf(y) + t;
 		if( t > MAXLOGF )
 			{
-			mtherr( "jvf", OVERFLOW );
+			mtherrf( "jvf", OVERFLOW );
 			return( MAXNUMF );
 			}
 		else

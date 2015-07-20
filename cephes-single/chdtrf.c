@@ -176,7 +176,7 @@ x = xx;
 
 if( (x < 0.0) || (df < 1.0) )
 	{
-	mtherr( "chdtrcf", DOMAIN );
+	mtherrf( "chdtrcf", DOMAIN );
 	return(0.0);
 	}
 return( igamcf( 0.5*df, 0.5*x ) );
@@ -196,7 +196,7 @@ df = dff;
 x = xx;
 if( (x < 0.0) || (df < 1.0) )
 	{
-	mtherr( "chdtrf", DOMAIN );
+	mtherrf( "chdtrf", DOMAIN );
 	return(0.0);
 	}
 return( igamf( 0.5*df, 0.5*x ) );
@@ -216,7 +216,7 @@ y = yy;
 df = dff;
 if( (y < 0.0) || (y > 1.0) || (df < 1.0) )
 	{
-	mtherr( "chdtrif", DOMAIN );
+	mtherrf( "chdtrif", DOMAIN );
 	return(0.0);
 	}
 

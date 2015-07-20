@@ -143,7 +143,7 @@ if( xx < 0 )
 	}
 if( x > T24M1 )
 	{
-	mtherr( "sinf", TLOSS );
+	mtherrf( "sinf", TLOSS );
 	return(0.0);
 	}
 j = FOPI * x; /* integer part of x/(PI/4) */
@@ -164,7 +164,7 @@ if( j > 3)
 
 if( x > lossth )
 	{
-	mtherr( "sinf", PLOSS );
+	mtherrf( "sinf", PLOSS );
 	x = x - y * PIO4F;
 	}
 else
@@ -238,7 +238,7 @@ if( x < 0 )
 
 if( x > T24M1 )
 	{
-	mtherr( "cosf", TLOSS );
+	mtherrf( "cosf", TLOSS );
 	return(0.0);
 	}
 
@@ -262,7 +262,7 @@ if( j > 1 )
 
 if( x > lossth )
 	{
-	mtherr( "cosf", PLOSS );
+	mtherrf( "cosf", PLOSS );
 	x = x - y * PIO4F;
 	}
 else
