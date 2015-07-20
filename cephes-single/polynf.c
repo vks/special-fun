@@ -114,9 +114,9 @@ if( pt1 )
 	free(pt1);
 
 /* Allocate new arrays */
-pt1 = (float * )malloc(psize); /* used by polsbt */
-pt2 = (float * )malloc(psize); /* used by polsbt */
-pt3 = (float * )malloc(psize); /* used by polmul */
+pt1 = (float * )malloc(psize); /* used by polsbtf */
+pt2 = (float * )malloc(psize); /* used by polsbtf */
+pt3 = (float * )malloc(psize); /* used by polmulf */
 
 /* Report if failure */
 if( (pt1 == NULL) || (pt2 == NULL) || (pt3 == NULL) )
@@ -455,9 +455,9 @@ return( sing );
  */
 
 #ifdef ANSIC
-void polsbt( float a[], int na, float b[], int nb, float c[] )
+void polsbtf( float a[], int na, float b[], int nb, float c[] )
 #else
-int polsbt( a, na, b, nb, c )
+int polsbtf( a, na, b, nb, c )
 float a[], b[], c[];
 int na, nb;
 #endif

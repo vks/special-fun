@@ -118,7 +118,7 @@ extern void polinif ( int maxdeg );
 extern void polmovf ( float *a, int na, float *b );
 extern void polmulf ( float a[], int na, float b[], int nb, float c[] );
 extern void polprtf ( float *a, int na, int d );
-extern void polsbt ( float a[], int na, float b[], int nb, float c[] );
+extern void polsbtf ( float a[], int na, float b[], int nb, float c[] );
 extern void polsubf ( float a[], int na, float b[], int nb, float c[] );
 extern float powf ( float x, float y );
 extern float powif ( float x, int nn );
