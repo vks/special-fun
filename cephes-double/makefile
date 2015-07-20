@@ -6,7 +6,7 @@ CC = gcc
 CFLAGS = -O2 -Wall -fno-builtin -march=native
 AR = ar
 RANLIB = ranlib
-INCS = mconf.h
+INCS = .
 AS = as
 OUT_DIR ?= .
 
