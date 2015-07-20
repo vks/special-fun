@@ -1,6 +1,6 @@
-use std::num::{Float, FromPrimitive};
+extern crate num;
 
-#[link(name = "md", kind = "static")]
+//#[link(name = "md", kind = "static")]  // should be handled by cargo
 extern "C" {
     /// Regularized incomplete beta function.
     fn incbet(a: f64, b: f64, x: f64) -> f64;
@@ -22,7 +22,7 @@ extern "C" {
 
 /// Special functions on primitive floating point numbers.
 /// These are essential for most statistical applications.
-pub trait FloatSpecial: Float {
+pub trait FloatSpecial {
     /// Regularized incomplete beta function.
     fn betainc(self, a: Self, b: Self) -> Self;
     /// Inverse of incomplete beta integral.
@@ -69,32 +69,39 @@ impl FloatSpecial for f64 {
 }
 
 #[cfg(test)]
-fn assert_almost_eq<T: Float + FromPrimitive + std::fmt::Show>(a: T, b: T) {
-    let tol: T = FromPrimitive::from_f32(1e-6).unwrap();
-    if (a - b).abs() > tol {
-        fail!("{} vs. {}", a, b);
+mod test {
+    use ::std;
+    use ::num::traits::{Float, FromPrimitive};
+
+    use super::FloatSpecial;
+
+    fn assert_almost_eq<T: Float + FromPrimitive + std::fmt::Debug>(a: T, b: T) {
+        let tol: T = FromPrimitive::from_f32(1e-6).unwrap();
+        if (a - b).abs() > tol {
+            panic!("{:?} vs. {:?}", a, b);
+        }
     }
-}
 
-#[test]
-fn test_beta() {
-    assert_almost_eq(0.5f64.betainc(2.0, 3.0), 0.6875);
-}
+    #[test]
+    fn test_beta() {
+        assert_almost_eq(0.5f64.betainc(2.0, 3.0), 0.6875);
+    }
 
-#[test]
-fn test_gamma() {
-    assert_almost_eq(4.0f64.gammainc(2.0), 0.90842180555632912);
-    assert_almost_eq(1.0 - 4.0f64.gammainc(2.0), 4.0f64.gammac(2.0));
-    assert_almost_eq(4.0f64.gammac(2.0).gammac_inv(2.0), 4.0);
-}
+    #[test]
+    fn test_gamma() {
+        assert_almost_eq(4.0f64.gammainc(2.0), 0.90842180555632912);
+        assert_almost_eq(1.0 - 4.0f64.gammainc(2.0), 4.0f64.gammac(2.0));
+        assert_almost_eq(4.0f64.gammac(2.0).gammac_inv(2.0), 4.0);
+    }
 
-#[test]
-fn test_norm() {
-    assert_almost_eq(2.0f64.norm(), 0.9772499);
-    assert_almost_eq(0.9f64.norm_inv(), 1.281552);
-}
+    #[test]
+    fn test_norm() {
+        assert_almost_eq(2.0f64.norm(), 0.9772499);
+        assert_almost_eq(0.9f64.norm_inv(), 1.281552);
+    }
 
-#[test]
-fn test_bessel() {
-    assert_almost_eq(10.0f64.besselj(2.0), 0.25463031368512062);
+    #[test]
+    fn test_bessel() {
+        assert_almost_eq(10.0f64.besselj(2.0), 0.25463031368512062);
+    }
 }
