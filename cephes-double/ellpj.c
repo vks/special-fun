@@ -44,9 +44,10 @@
  *    IEEE      phi         10000       9.2e-16*    1.4e-16*
  *    IEEE      sn          50000       4.1e-15     4.6e-16
  *    IEEE      cn          40000       3.6e-15     4.4e-16
- *    IEEE      dn          10000       1.3e-12     1.8e-14
+ *    IEEE      dn         100000       3.9e-15     1.7e-16
  *
- *  Peak error observed in consistency check using addition
+ * Larger errors occur for m near 1.
+ * Peak error observed in consistency check using addition
  * theorem for sn(u+v) was 4e-16 (absolute).  Also tested by
  * the above relation to the incomplete elliptic integral.
  * Accuracy deteriorates when u is large.
@@ -58,7 +59,7 @@
 
 /*
 Cephes Math Library Release 2.8:  June, 2000
-Copyright 1984, 1987, 2000 by Stephen L. Moshier
+Copyright 1984, 1987, 2000, 2014 by Stephen L. Moshier
 */
 
 #include "mconf.h"
@@ -162,10 +163,11 @@ do
 	}
 while( --i );
 
-*sn = sin(phi);
-t = cos(phi);
-*cn = t;
-*dn = t/cos(phi-b);
+t = sin(phi);
+*sn = t;
+*cn = cos(phi);
+/* Thanks to Hartmut Henkel for reporting a bug here:  */
+*dn = sqrt(1.0 - m * t * t);
 *ph = phi;
 return(0);
 }

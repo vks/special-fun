@@ -1,0 +1,13 @@
+	.file	"sqrt.amd64"
+.text
+	.p2align 4,,15
+.globl sqrt
+       .type   sqrt, @function
+sqrt:
+.LFB3:
+	subq	$8, %rsp
+	movapd	%xmm0, %xmm1
+	sqrtsd	%xmm0, %xmm0
+	addq	$8, %rsp
+	ret
+	.size	sqrt,.-sqrt
