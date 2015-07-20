@@ -2,7 +2,6 @@
 name = "special-fun"
 version = "0.0.1"
 authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
-links = "md"
 build = "build.rs"
 
 [dependencies]
