@@ -1,13 +1,41 @@
-special-fun
-===========
+# special-fun
 
-Special functions for Rust by binding to the CEPHES library.
+Special functions for Rust by binding to the [Cephes library][1].
 
-This implements the "Elusive Eight" special functions useful for statistics, as advocated in [1]. For this, the CEPHES library [2] is used. While it is not explicitly stated on [2], CEPHES has been BSD licensed in the past [3], [4].
+The following families of functions currently have Rust bindings for `f32` and
+`f64`:
+
+* Bessel functions
+* Beta functions
+* Error functions
+* Gamma functions
+* Hypergeometric functions
+* Zeta functions
+* Normal probability distribution
+
+Cephes implements a lot more functions that are not yet exposed in the Rust
+interface.
 
 
-[1]: http://www.evanmiller.org/statistical-shortcomings-in-standard-math-libraries.html
-[2]: http://www.moshier.net/#Cephes
-[3]: https://lists.debian.org/debian-legal/2004/12/msg00295.html
-[4]: https://github.com/jucor/torch-cephes/blob/master/LICENSE.txt
+## Installing
 
+Cargo is used to build the included Cephes library (which is written in C) and
+to create a Rust library that statically links to Cephes.
+
+
+## License
+
+While it is not explicitly stated [on the website of the author][1], Cephes has
+been BSD licensed in the past (see [here][2] and [here][3]).
+
+## Related Projects
+
+* [special][4]: Special functions implemented in pure Rust. Has less functions
+  implemented and only supports `f64`.
+
+
+
+[1]: http://www.moshier.net/#Cephes
+[2]: https://lists.debian.org/debian-legal/2004/12/msg00295.html
+[3]: https://github.com/jucor/torch-cephes/blob/master/LICENSE.txt
+[4]: https://github.com/stainless-steel/special
