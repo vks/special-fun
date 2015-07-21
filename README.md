@@ -1,5 +1,7 @@
 # special-fun
 
+[![Status][status-img]][status-url]
+
 Special functions for Rust by binding to the [Cephes library][1].
 
 The following families of functions currently have Rust bindings for `f32` and
@@ -39,3 +41,6 @@ been BSD licensed in the past (see [here][2] and [here][3]).
 [2]: https://lists.debian.org/debian-legal/2004/12/msg00295.html
 [3]: https://github.com/jucor/torch-cephes/blob/master/LICENSE.txt
 [4]: https://github.com/stainless-steel/special
+
+[status-img]: https://travis-ci.org/vks/special-fun.svg?branch=master
+[status-url]: https://travis-ci.org/vks/special-fun
