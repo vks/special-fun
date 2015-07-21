@@ -38,7 +38,9 @@ extern "C" {
     fn exp10(x: f64) -> f64;
     /// Base 2 exponential function.
     fn exp2(x: f64) -> f64;
-    /// Exponential of squared argument.
+    /// Compute accurately exponential of squared argument.
+    fn expm1(x: f64) -> f64;
+    /// Compute accurately exp(x) - 1 for x close to 0.
     fn expx2(x: f64, sign: i32) -> f64;
     /// Exponential integral.
     fn ei(x: f64) -> f64;
@@ -58,6 +60,8 @@ extern "C" {
     fn log10(x: f64) -> f64;
     /// Base 2 logarithm.
     fn log2(x: f64) -> f64;
+    /// Compute accurately log(1 + x) for x close to 0.
+    fn log1p(x: f64) -> f64;
     /// Dilogarithm (Spence's function).
     fn spence(x: f64) -> f64;
 
@@ -76,6 +80,8 @@ extern "C" {
     fn atan(x: f64) -> f64;
     /// Quadrant-correct inverse circular tangent.
     fn atan2(y: f64, x: f64) -> f64;
+    /// Compute accurately cos(x) - 1 for x close to 0.
+    fn cosm1(x: f64) -> f64;
     /// Sine and cosine integrals.
     fn sici(x: f64, si: &mut f64, ci: &mut f64) -> f64;
 
