@@ -254,6 +254,8 @@ extern "C" {
 
 /// Special functions on primitive floating point numbers.
 pub trait FloatSpecial {
+    /// Beta function.
+    fn beta(self, b: Self) -> Self;
     /// Regularized incomplete beta function.
     fn betainc(self, a: Self, b: Self) -> Self;
     /// Inverse of incomplete beta integral.
@@ -296,6 +298,9 @@ pub trait FloatSpecial {
 }
 
 impl FloatSpecial for f64 {
+    fn beta(self, b: f64) -> f64 {
+        unsafe { beta(self, b) }
+    }
     fn betainc(self, a: f64, b: f64) -> f64 {
         unsafe { incbet(a, b, self) }
     }
@@ -401,7 +406,10 @@ mod test {
 
         #[test]
         fn beta() {
+            assert_almost_eq(5.0f64.beta(2.0), 0.03333333333333);
+            assert_almost_eq(1.5f64.beta(2.0), 0.26666666666666);
             assert_almost_eq(0.5f64.betainc(2.0, 3.0), 0.6875);
+            assert_almost_eq(0.6875f64.betainc_inv(2.0, 3.0), 0.5);
         }
 
         #[test]
