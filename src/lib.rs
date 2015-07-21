@@ -258,12 +258,23 @@ pub trait FloatSpecial {
     fn betainc(self, a: Self, b: Self) -> Self;
     /// Inverse of incomplete beta integral.
     fn betainc_inv(self, a: Self, b: Self) -> Self;
+
+    /// Factorial.
+    fn factorial(self) -> Self;
+    /// Gamma function.
+    fn gamma(self) -> Self;
+    /// Reciprocal gamma function.
+    fn rgamma(self) -> Self;
+    /// Logarithm of gamma function.
+    fn loggamma(self) -> Self;
+
     /// Regularized incomplete gamma integral.
     fn gammainc(self, a: Self) -> Self;
     /// Complemented incomplete gamma integral.
     fn gammac(self, a: Self) -> Self;
     /// Inverse of complemented incomplete gamma integral.
     fn gammac_inv(self, a: Self) -> Self;
+
     /// Normal distribution function.
     fn norm(self) -> Self;
     /// Inverse of Normal distribution function.
@@ -291,6 +302,20 @@ impl FloatSpecial for f64 {
     fn betainc_inv(self, a: f64, b: f64) -> f64 {
         unsafe { incbi(a, b, self) }
     }
+
+    fn factorial(self) -> f64 {
+        unsafe { gamma(self + 1.0) }
+    }
+    fn gamma(self) -> f64 {
+        unsafe { gamma(self) }
+    }
+    fn rgamma(self) -> f64 {
+        unsafe { rgamma(self) }
+    }
+    fn loggamma(self) -> f64 {
+        unsafe { lgam(self) }
+    }
+
     fn gammainc(self, a: f64) -> f64 {
         unsafe { igam(a, self) }
     }
@@ -300,12 +325,14 @@ impl FloatSpecial for f64 {
     fn gammac_inv(self, a: f64) -> f64 {
         unsafe { igami(a, self) }
     }
+
     fn norm(self) -> f64 {
         unsafe { ndtr(self) }
     }
     fn norm_inv(self) -> f64 {
         unsafe { ndtri(self) }
     }
+
     fn besselj(self, v: f64) -> f64 {
         unsafe { jv(v, self) }
     }
@@ -318,6 +345,7 @@ impl FloatSpecial for f64 {
     fn besselk(self, n: i32) -> f64 {
         unsafe { kn(n, self) }
     }
+
     fn riemann_zeta(self) -> f64 {
         unsafe { 1.0 + zetac(self) }
     }
@@ -377,7 +405,16 @@ mod test {
         }
 
         #[test]
+        fn factorial() {
+            assert_almost_eq(0.5f64.factorial(), 0.886226925452758);
+        }
+
+        #[test]
         fn gamma() {
+            assert_almost_eq(3.5f64.gamma(), 3.32335097044784);
+            assert_eq!(1.0f64.rgamma(), 1.0);
+            assert_almost_eq(4.0f64.rgamma(), 0.1666666666666666666);
+            assert_almost_eq(13.2f64.loggamma(), 20.49400419456603678498394);
             assert_almost_eq(4.0f64.gammainc(2.0), 0.90842180555632912);
             assert_almost_eq(1.0 - 4.0f64.gammainc(2.0), 4.0f64.gammac(2.0));
             assert_almost_eq(4.0f64.gammac(2.0).gammac_inv(2.0), 4.0);
