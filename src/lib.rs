@@ -277,6 +277,9 @@ pub trait FloatSpecial {
     /// Inverse of complemented incomplete gamma integral.
     fn gammac_inv(self, a: Self) -> Self;
 
+    /// Digamma function.
+    fn digamma(self) -> Self;
+
     /// Normal distribution function.
     fn norm(self) -> Self;
     /// Inverse of Normal distribution function.
@@ -329,6 +332,10 @@ impl FloatSpecial for f64 {
     }
     fn gammac_inv(self, a: f64) -> f64 {
         unsafe { igami(a, self) }
+    }
+
+    fn digamma(self) -> f64 {
+        unsafe { psi(self) }
     }
 
     fn norm(self) -> f64 {
@@ -426,6 +433,11 @@ mod test {
             assert_almost_eq(4.0f64.gammainc(2.0), 0.90842180555632912);
             assert_almost_eq(1.0 - 4.0f64.gammainc(2.0), 4.0f64.gammac(2.0));
             assert_almost_eq(4.0f64.gammac(2.0).gammac_inv(2.0), 4.0);
+        }
+
+        #[test]
+        fn digamma() {
+            assert_almost_eq(1.0f64.digamma(), -0.5772156649015328606065121);
         }
 
         #[test]
