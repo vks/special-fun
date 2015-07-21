@@ -176,10 +176,14 @@ extern "C" {
     fn ellpj(u: f64, m: f64, sn: &mut f64, cn: &mut f64, dn: &mut f64, phi: &mut f64) -> i32;
 
     // Hypergeometric functions
+    /// Confluent hypergeometric function 1F1.
+    fn hyperg(a: f64, b: f64, x: f64) -> f64;
+    /// Hypergeometric function 1F2.
+    fn onef2(a: f64, b: f64, c: f64, x: f64, err: &mut f64) -> f64;
     /// Gauss hypergeometric function 2F1.
     fn hyp2f1(a: f64, b: f64, c: f64, x: f64) -> f64;
-    /// Confluent hypergeometric function.
-    fn hyperg(a: f64, b: f64, x: f64) -> f64;
+    /// Hypergeometric function 3F0.
+    fn threef0(a: f64, b: f64, c: f64, x: f64, err: &mut f64) -> f64;
 
     // Distributions
     /// Binomial distribution.
@@ -280,6 +284,15 @@ pub trait FloatSpecial {
     /// Digamma function.
     fn digamma(self) -> Self;
 
+    /// Confluent hypergeometric function 1F1.
+    fn hyp1f1(self, a: Self, b: Self) -> Self;
+    /// Hypergeometric function 1F2.
+    fn hyp1f2(self, a: Self, b: Self, c: Self) -> Self;
+    /// Gauss hypergeometric function 2F1.
+    fn hyp2f1(self, a: Self, b: Self, c: Self) -> Self;
+    /// Hypergeometric function 3F0.
+    fn hyp3f0(self, a: Self, b: Self, c: Self) -> Self;
+
     /// Normal distribution function.
     fn norm(self) -> Self;
     /// Inverse of Normal distribution function.
@@ -336,6 +349,21 @@ impl FloatSpecial for f64 {
 
     fn digamma(self) -> f64 {
         unsafe { psi(self) }
+    }
+
+    fn hyp1f1(self, a: f64, b: f64) -> f64 {
+        unsafe { hyperg(a, b, self) }
+    }
+    fn hyp1f2(self, a: f64, b: f64, c: f64) -> f64 {
+        let mut err = 0.0;
+        unsafe { onef2(a, b, c, self, &mut err) }
+    }
+    fn hyp2f1(self, a: f64, b: f64, c: f64) -> f64 {
+        unsafe { hyp2f1(a, b, c, self) }
+    }
+    fn hyp3f0(self, a: f64, b: f64, c: f64) -> f64 {
+        let mut err = 0.0;
+        unsafe { threef0(a, b, c, self, &mut err) }
     }
 
     fn norm(self) -> f64 {
@@ -438,6 +466,15 @@ mod test {
         #[test]
         fn digamma() {
             assert_almost_eq(1.0f64.digamma(), -0.5772156649015328606065121);
+        }
+
+        #[test]
+        fn hypergeometric() {
+            assert_almost_eq(1.5f64.hyp1f1(1.5, 3.0), 2.269381460919952778587441);
+            assert_almost_eq(10.0f64.hyp1f2(1.5, 3.0, 2.25), 7.0792797035649206);
+            assert_eq!(1.0f64.hyp2f1(-2.5, 3.5, 1.5), 0.0);
+            assert_almost_eq(1.0f64.hyp2f1(-2.5, 3.0, 4.0), 0.06926406926406926406926407);
+            assert_almost_eq(0.2f64.hyp3f0(-0.5, 0.6, -0.7), 1.04370133264);
         }
 
         #[test]
