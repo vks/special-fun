@@ -127,7 +127,7 @@ extern "C" {
     fn j1(x: f64) -> f64;
     /// Bessel function of integer order.
     fn jn(n: i32, x: f64) -> f64;
-    /// Bessel function of noninteger order.
+    /// Bessel function of real order.
     fn jv(n: f64, x: f64) -> f64;
 
     /// Bessel function of the second kind, order zero.
@@ -136,6 +136,8 @@ extern "C" {
     fn y1(x: f64) -> f64;
     /// Bessel function of the second kind, integer order.
     fn yn(n: i32, x: f64) -> f64;
+    /// Bessel function of the second kind, real order.
+    fn yv(v: f64, x: f64) -> f64;
 
     /// Modified Bessel function of order zero.
     fn i0(x: f64) -> f64;
@@ -145,7 +147,7 @@ extern "C" {
     fn i1(x: f64) -> f64;
     /// Modified Bessel function of order one, exponentially scaled.
     fn i1e(x: f64) -> f64;
-    /// Modified Bessel function of noninteger order.
+    /// Modified Bessel function of real order.
     fn iv(v: f64, x: f64) -> f64;
 
     /// Modified Bessel function of the third kind, order zero.
@@ -266,8 +268,16 @@ pub trait FloatSpecial {
     fn norm(self) -> Self;
     /// Inverse of Normal distribution function.
     fn norm_inv(self) -> Self;
-    /// Bessel function of non-integer order of the first kind.
+
+    /// Bessel function of real order of the first kind.
     fn besselj(self, v: Self) -> Self;
+    /// Bessel function of real order of the second kind.
+    fn bessely(self, v: Self) -> Self;
+    /// Modified bessel function of real order of the first kind.
+    fn besseli(self, v: Self) -> Self;
+    /// Modified bessel function of integer order of the second kind.
+    fn besselk(self, v: i32) -> Self;
+
     /// Riemann zeta function.
     fn riemann_zeta(self) -> Self;
     /// Hurwitz zeta function.
@@ -298,6 +308,15 @@ impl FloatSpecial for f64 {
     }
     fn besselj(self, v: f64) -> f64 {
         unsafe { jv(v, self) }
+    }
+    fn bessely(self, v: f64) -> f64 {
+        unsafe { yv(v, self) }
+    }
+    fn besseli(self, v: f64) -> f64 {
+        unsafe { iv(v, self) }
+    }
+    fn besselk(self, n: i32) -> f64 {
+        unsafe { kn(n, self) }
     }
     fn riemann_zeta(self) -> f64 {
         unsafe { 1.0 + zetac(self) }
@@ -371,8 +390,29 @@ mod test {
         }
 
         #[test]
-        fn bessel() {
+        fn besselj() {
             assert_almost_eq(10.0f64.besselj(2.0), 0.25463031368512062);
+            assert_almost_eq(1000.0f64.besselj(2.0), -0.024777229528606);
+            assert_almost_eq(0.75f64.besselj(4.0), 0.000801070086542314);
+        }
+
+        #[test]
+        fn bessely() {
+            assert_almost_eq(
+                3.141592653589793f64.bessely(1.0), 0.3588729167767189594679827);
+        }
+
+        #[test]
+        fn besseli() {
+            assert_eq!(0.0f64.besseli(0.0), 1.0);
+            assert_eq!(0.0f64.besseli(1.0), 0.0);
+            assert_almost_eq(1.0f64.besseli(0.0), 1.266065877752008335598245);
+        }
+
+        #[test]
+        fn besselk() {
+            assert_almost_eq(1.0f64.besselk(0), 0.4210244382407083333356274);
+            assert_almost_eq(100.0f64.besselk(0), 4.656628229175902018939005e-45);
         }
 
         #[test]
