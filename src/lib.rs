@@ -251,7 +251,6 @@ extern "C" {
 }
 
 /// Special functions on primitive floating point numbers.
-/// These are essential for most statistical applications.
 pub trait FloatSpecial {
     /// Regularized incomplete beta function.
     fn betainc(self, a: Self, b: Self) -> Self;
@@ -269,6 +268,10 @@ pub trait FloatSpecial {
     fn norm_inv(self) -> Self;
     /// Bessel function of non-integer order of the first kind.
     fn besselj(self, v: Self) -> Self;
+    /// Riemann zeta function.
+    fn riemann_zeta(self) -> Self;
+    /// Hurwitz zeta function.
+    fn hurwitz_zeta(self, q: Self) -> Self;
 }
 
 impl FloatSpecial for f64 {
@@ -295,6 +298,12 @@ impl FloatSpecial for f64 {
     }
     fn besselj(self, v: f64) -> f64 {
         unsafe { jv(v, self) }
+    }
+    fn riemann_zeta(self) -> f64 {
+        unsafe { 1.0 + zetac(self) }
+    }
+    fn hurwitz_zeta(self, q: f64) -> f64 {
+        unsafe { zeta(self, q) }
     }
 }
 
@@ -364,6 +373,20 @@ mod test {
         #[test]
         fn bessel() {
             assert_almost_eq(10.0f64.besselj(2.0), 0.25463031368512062);
+        }
+
+        #[test]
+        fn riemann_zeta() {
+            assert_almost_eq(2.0f64.riemann_zeta(), 1.64493406684822);
+            assert_eq!(0.0f64.riemann_zeta(), -0.5);
+            //assert_almost_eq(-1.0f64.riemann_zeta(), -0.0833333333333);
+            assert_almost_eq(50.0f64.riemann_zeta(), 1.0);
+        }
+
+        #[test]
+        fn hurwitz_zeta() {
+            assert_almost_eq(2.0f64.hurwitz_zeta(3.0), 0.3949340668482);
+            //assert_almost_eq(0.0f64.hurwitz_zeta(10.0), -9.5);
         }
     }
 
