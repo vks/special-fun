@@ -1,5 +1,6 @@
 extern crate num;
 
+#[allow(dead_code)]
 extern "C" {
     // Floating point numeric utilities
     /// Round to nearest or event integer valued f64.
