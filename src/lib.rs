@@ -1,5 +1,7 @@
 extern crate num;
 
+use num::traits::Float;
+
 // double precision
 #[allow(dead_code)]
 extern "C" {
@@ -529,9 +531,13 @@ extern "C" {
 }
 
 /// Special functions on primitive floating point numbers.
-pub trait FloatSpecial {
+pub trait FloatSpecial: Float {
     /// Beta function.
     fn beta(self, b: Self) -> Self;
+    /// Logarithm of beta function.
+    fn logbeta(self, b: Self) -> Self {
+        self.loggamma() + b.loggamma() - (self + b).loggamma()
+    }
     /// Regularized incomplete beta function.
     fn betainc(self, a: Self, b: Self) -> Self;
     /// Inverse of incomplete beta integral.
@@ -767,6 +773,7 @@ mod test {
         fn beta() {
             assert_almost_eq(5.0f64.beta(2.0), 0.03333333333333);
             assert_almost_eq(1.5f64.beta(2.0), 0.26666666666666);
+            assert_almost_eq(1.5f64.logbeta(3.7), -2.1763500732197696);
             assert_almost_eq(0.5f64.betainc(2.0, 3.0), 0.6875);
             assert_almost_eq(0.6875f64.betainc_inv(2.0, 3.0), 0.5);
         }
@@ -856,6 +863,7 @@ mod test {
         fn beta() {
             assert_almost_eq(5.0f32.beta(2.0), 0.03333333333333);
             assert_almost_eq(1.5f32.beta(2.0), 0.26666666666666);
+            assert_almost_eq(1.5f32.logbeta(3.7), -2.1763500732197696);
             assert_almost_eq(0.5f32.betainc(2.0, 3.0), 0.6875);
             assert_almost_eq(0.6875f32.betainc_inv(2.0, 3.0), 0.5);
         }
