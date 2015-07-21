@@ -562,6 +562,11 @@ pub trait FloatSpecial: Float {
     /// Digamma function.
     fn digamma(self) -> Self;
 
+    /// Error function.
+    fn erf(self) -> Self;
+    /// Complementary error function.
+    fn erfc(self) -> Self;
+
     /// Confluent hypergeometric function 1F1.
     fn hyp1f1(self, a: Self, b: Self) -> Self;
     /// Hypergeometric function 1F2.
@@ -627,6 +632,13 @@ impl FloatSpecial for f64 {
 
     fn digamma(self) -> f64 {
         unsafe { psi(self) }
+    }
+
+    fn erf(self) -> f64 {
+        unsafe { erf(self) }
+    }
+    fn erfc(self) -> f64 {
+        unsafe { erfc(self) }
     }
 
     fn hyp1f1(self, a: f64, b: f64) -> f64 {
@@ -708,6 +720,13 @@ impl FloatSpecial for f32 {
 
     fn digamma(self) -> f32 {
         unsafe { psif(self) }
+    }
+
+    fn erf(self) -> f32 {
+        unsafe { erff(self) }
+    }
+    fn erfc(self) -> f32 {
+        unsafe { erfcf(self) }
     }
 
     fn hyp1f1(self, a: f32, b: f32) -> f32 {
@@ -800,6 +819,14 @@ mod test {
         }
 
         #[test]
+        fn error() {
+            assert_eq!(0.0f64.erf(), 0.0);
+            assert_almost_eq(1.0f64.erf(), 0.842700792949715);
+            assert_almost_eq(-1.0f64.erf(), -0.842700792949715);
+            assert_almost_eq(1.0f64.erfc(), 0.157299207050285);
+        }
+
+        #[test]
         fn hypergeometric() {
             assert_almost_eq(1.5f64.hyp1f1(1.5, 3.0), 2.269381460919952778587441);
             assert_almost_eq(10.0f64.hyp1f2(1.5, 3.0, 2.25), 7.0792797035649206);
@@ -887,6 +914,14 @@ mod test {
         #[test]
         fn digamma() {
             assert_almost_eq(1.0f32.digamma(), -0.5772156649015328606065121);
+        }
+
+        #[test]
+        fn error() {
+            assert_eq!(0.0f64.erf(), 0.0);
+            assert_almost_eq(1.0f64.erf(), 0.842700792949715);
+            assert_almost_eq(-1.0f64.erf(), -0.842700792949715);
+            assert_almost_eq(1.0f64.erfc(), 0.157299207050285);
         }
 
         #[test]
