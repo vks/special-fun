@@ -1,6 +1,6 @@
 [package]
 name = "special-fun"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
 build = "build.rs"
 
