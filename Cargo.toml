@@ -5,4 +5,4 @@ authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
 build = "build.rs"
 
 [dependencies]
-num = "*"
+num = "0.1.*"
