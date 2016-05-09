@@ -1,6 +1,6 @@
-extern crate num;
+extern crate num_traits;
 
-use num::traits::Float;
+use num_traits::Float;
 
 // double precision
 #[allow(dead_code)]
@@ -775,7 +775,7 @@ impl FloatSpecial for f32 {
 #[cfg(test)]
 mod test {
     use ::std::fmt::Debug;
-    use ::num::traits::{Float, FromPrimitive};
+    use ::num_traits::{Float, FromPrimitive};
 
     fn assert_almost_eq<T: Float + FromPrimitive + Debug>(a: T, b: T) {
         let tol: T = FromPrimitive::from_f32(1e-6).unwrap();
