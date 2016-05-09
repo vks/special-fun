@@ -1,7 +1,7 @@
 [package]
 name = "special-fun"
 description = "Special functions for Rust by binding to the Cephes library."
-keywords = ["special function", "float", "single", "double"]
+keywords = ["float", "single", "double"]
 version = "0.1.3"
 authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
 homepage = "https://github.com/vks/special-fun"
