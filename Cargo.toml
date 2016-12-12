@@ -22,5 +22,5 @@ include = [
     "cephes-double/makefile",
 ]
 
-[dependencies]
+[dev-dependencies]
 num-traits = "0.1"

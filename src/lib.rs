@@ -1,6 +1,7 @@
+#[cfg(test)]
 extern crate num_traits;
 
-use num_traits::Float;
+use std::ops::{Add, Sub};
 
 // double precision
 #[allow(dead_code)]
@@ -531,7 +532,7 @@ extern "C" {
 }
 
 /// Special functions on primitive floating point numbers.
-pub trait FloatSpecial: Float {
+pub trait FloatSpecial: Copy + Add<Output=Self> + Sub<Output=Self> {
     /// Beta function.
     fn beta(self, b: Self) -> Self;
     /// Logarithm of beta function.
