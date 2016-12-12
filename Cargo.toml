@@ -2,25 +2,13 @@
 name = "special-fun"
 description = "Special functions for Rust by binding to the Cephes library."
 keywords = ["float", "single", "double"]
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
 homepage = "https://github.com/vks/special-fun"
 repository = "https://github.com/vks/special-fun"
 readme = "README.md"
 license = "BSD-2-Clause"
 build = "build.rs"
-include = [
-    "src/lib.rs",
-    "Cargo.toml",
-    "build.rs",
-    "README.md",
-    "cephes-single/*.c",
-    "cephes-single/*.h",
-    "cephes-single/makefile",
-    "cephes-double/*.c",
-    "cephes-double/*.h",
-    "cephes-double/makefile",
-]
 
 [dev-dependencies]
 num-traits = "0.1"
