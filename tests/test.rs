@@ -1,8 +1,6 @@
 extern crate special_fun;
 extern crate num_traits;
 
-use special_fun::FloatSpecial;
-
 use ::std::fmt::Debug;
 use ::num_traits::{Float, FromPrimitive};
 
@@ -14,7 +12,7 @@ fn assert_almost_eq<T: Float + FromPrimitive + Debug>(a: T, b: T) {
 }
 
 mod double {
-    use super::FloatSpecial;
+    use special_fun::FloatSpecial;
     use super::assert_almost_eq;
 
     #[test]
@@ -112,7 +110,7 @@ mod double {
 }
 
 mod single {
-    use super::FloatSpecial;
+    use special_fun::FloatSpecial;
     use super::assert_almost_eq;
 
     #[test]
