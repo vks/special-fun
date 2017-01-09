@@ -4,7 +4,6 @@ description = "Special functions for Rust by binding to the Cephes library."
 keywords = ["float", "single", "double"]
 version = "0.1.4"
 authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
-homepage = "https://github.com/vks/special-fun"
 repository = "https://github.com/vks/special-fun"
 readme = "README.md"
 license = "BSD-2-Clause"
