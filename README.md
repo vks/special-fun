@@ -31,6 +31,13 @@ The bindings and the Cephes library use the BSD license.
 The author of Cephes (Stephen Moshier) has agreed to this.
 
 
+## Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, shall be dual licensed as above, without any
+additional terms or conditions.
+
+
 ## Related Projects
 
 * [special][2]: Special functions implemented in pure Rust. Has less functions
