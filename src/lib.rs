@@ -240,7 +240,7 @@ extern "C" {
     /// Poisson distribution.
     fn pdtr(k: i32, m: f64) -> f64;
     /// Complemented Poisson distribution.
-    fn pdtrk(k: i32, m: f64) -> f64;
+    fn pdtrc(k: i32, m: f64) -> f64;
     /// Inverse of Poisson distribution.
     fn pdtri(k: i32, y: f64) -> f64;
 
@@ -504,7 +504,7 @@ extern "C" {
     /// Poisson distribution.
     fn pdtrf(k: i32, m: f32) -> f32;
     /// Complemented Poisson distribution.
-    fn pdtrkf(k: i32, m: f32) -> f32;
+    fn pdtrcf(k: i32, m: f32) -> f32;
     /// Inverse of Poisson distribution.
     fn pdtrif(k: i32, y: f32) -> f32;
 
