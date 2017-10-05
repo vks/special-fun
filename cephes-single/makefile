@@ -3,7 +3,7 @@
 
 CC = gcc
 #CFLAGS = -g -O2 -Wall -fno-builtin # -ffloat-store
-CFLAGS = -O2 -Wall -fno-builtin -march=native -fPIC
+CFLAGS ?= -O3 -Wall -fno-builtin -fPIC
 AR = ar
 RANLIB = ranlib
 INCS = .

@@ -24,6 +24,12 @@ interface.
 Cargo is used to build the included Cephes library (which is written in C) and
 to create a Rust library that statically links to Cephes.
 
+By default, the C code is compiled with the following flags:
+
+    -O3 -Wall -fno-builtin -fPIC
+
+You can overwrite this by defining the `CFLAGS` environment variable. Note that
+`-fPIC` has to be included, because it is required by Rust.
 
 ## License
 
