@@ -268,60 +268,465 @@ pub mod unsafe_cephes_double {
     }
 }
 
-    /// Beta distribution.
-    fn btdtr(a: f64, b: f64, x: f64) -> f64;
+pub mod cephes_double {
+    use unsafe_cephes_double;
 
-    /// Chi-square distribution.
-    fn chdtr(df: f64, x: f64) -> f64;
-    /// Complemented chi-square distribution.
-    fn chdtrc(v: f64, x: f64) -> f64;
-    /// Inverse of complemented chi-square distribution.
-    fn chdtri(df: f64, y: f64) -> f64;
+    /// Function to compute the base-10 exponential of x
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// Returns 10 raised to the x power.
+    ///
+    /// Range reduction is accomplished by expressing the argument
+    /// as 10^x = 2^n 10^f, with |f| < 0.5 log10(2).
+    /// The Pade' form
+    ///
+    /// 10^x = 1 + 2x P( x^2)/( Q( x^2 ) - P( x^2 ) )
+    ///
+    /// is used to approximate 10^f.
+    ///
+    /// ACCURACY (Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :-------: | :---: | :--: |
+    /// | IEEE       | -307,+307 | 30000 | 2.2e-16 | 5.5e-17 |
+    ///
+    /// ERROR MESSAGES:
+    ///
+    /// | message | condition | value returned |
+    /// | :-----: | :-------: | :------------: |
+    /// | exp10 underflow | x < -MAXL10 | 0.0  |
+    /// | exp10 overflow | x > MAXL10 | MAXNUM |
+    ///
+    /// IEEE arithmetic: MAXL10 = 308.2547155599167.
+    ///
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::exp10;
+    /// let x = 1.0f64;
+    /// exp10(x);
+    /// ```
+    pub fn exp10(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::exp10(x) }
+    }
 
-    /// F distribution.
-    fn fdtr(df1: i32, df2: i32, x: f64) -> f64;
-    /// Complemented F distribution.
-    fn fdtrc(df1: i32, df2: i32, x: f64) -> f64;
-    /// Inverse of complemented F distribution.
-    fn fdtri(df1: i32, df2: i32, p: f64) -> f64;
+    /// Function to accurately compute `exp(x) - 1` for small x
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::expm1;
+    /// let x = 1.0f64;
+    /// expm1(x);
+    /// ```
+    pub fn expm1(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::expm1(x) }
+    }
 
-    /// Gamma distribution.
-    fn gdtr(a: f64, b: f64, x: f64) -> f64;
-    /// Complemented gamma distribution.
-    fn gdtrc(a: f64, b: f64, x: f64) -> f64;
+    /// Function to accurately compute the exponential of a squared argument
+    ///
+    /// # Original Description from Stephen L. Moshier
+    ///
+    /// Computes y = exp(x*x) while suppressing error amplification
+    /// that would ordinarily arise from the inexactness of the
+    /// exponential argument x*x.
+    ///
+    /// If sign < 0, the result is inverted; i.e., y = exp(-x*x) .
+    ///
+    /// ACCURACY (Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :------: | :--: | :--:|
+    /// | IEEE | -26.6, 26.6 | 10^7 | 3.9e-16 | 8.9e-17 |
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    /// * 'sign': An integer representing the sign of the exponent
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::expx2;
+    /// let x = 1.0f64;
+    /// expx2(x, -1);
+    /// ```
+    pub fn expx2(x: f64, sign: i32) -> f64 {
+        unsafe { unsafe_cephes_double::expx2(x, sign) }
+    }
 
-    /// Normal distribution.
-    fn ndtr(x: f64) -> f64;
-    /// Inverse of normal distribution.
-    fn ndtri(y: f64) -> f64;
+    /// Function to accurately compute the exponential integral of x
+    ///
+    /// The exponential integral is given by:
+    ///
+    /// $Ei(x) = -\int^{\infty}_{-x} \frac{e^{-t}}{t} dt$
+    ///
+    /// # Original Description from Stephen L. Moshier
+    ///
+    /// ACCURACY (Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :------: | :--: | :--:|
+    /// | IEEE | 0, 100 | 50000 | 8.6e-16 | 1.3e-16 |
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::ei;
+    /// let x = 1.0f64;
+    /// ei(x);
+    /// ```
+    pub fn ei(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::ei(x) }
+    }
 
-    /// Poisson distribution.
-    fn pdtr(k: i32, m: f64) -> f64;
-    /// Complemented Poisson distribution.
-    fn pdtrc(k: i32, m: f64) -> f64;
-    /// Inverse of Poisson distribution.
-    fn pdtri(k: i32, y: f64) -> f64;
+    /// Function to accurately compute the error function of x
+    ///
+    /// The error function is given by:
+    ///
+    /// $Erf(x) = \frac{2}{\sqrt{pi}} -\int^{x}_{0} e^{-t^2} dt$
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::erf;
+    /// let x = 1.0f64;
+    /// erf(x);
+    /// ```
+    pub fn erf(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::erf(x) }
+    }
 
-    /// Student's t distribution.
-    fn stdtr(k: i16, t: f64) -> f64;
-    /// Inverse of Student's t distribution.
-    fn stdtri(k: i32, p: f64) -> f64;
+    /// Function to accurately compute the complementary error function of x
+    ///
+    /// The error function is given by:
+    ///
+    /// $Erf(x) = 1 + \frac{2}{\sqrt{pi}} -\int^{x}_{0} e^{-t^2} dt$
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::erfc;
+    /// let x = 1.0f64;
+    /// erfc(x);
+    /// ```
+    pub fn erfc(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::erfc(x) }
+    }
 
-    // Misc special functions
-    /// Airy function.
-    fn airy(x: f64, ai: &mut f64, aip: &mut f64, bi: &mut f64, bip: &mut f64) -> i32;
-    /// Dawson's integral.
-    fn dawsn(x: f64) -> f64;
-    /// Fresnel integral.
-    fn fresnl(x: f64, s: &mut f64, c: &mut f64);
-    /// Integral of Planck's black body radiation formula.
-    fn plancki(lambda: f64, temperature: f64) -> f64;
-    /// Struve function.
-    fn struve(v: f64, x: f64) -> f64;
-    /// Riemann zeta function.
-    fn zetac(x: f64) -> f64;
-    /// Riemann zeta function of two arguments.
-    fn zeta(x: f64, q: f64) -> f64;
+    /// Function to accurately compute `log(1 + x)`
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::log1p;
+    /// let x = 0.1f64;
+    /// log1p(x);
+    /// ```
+    pub fn log1p(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::log1p(x) }
+    }
+
+    /// Function to accurately compute the dilogarithm function
+    ///
+    /// Spence's function is a special case of the polylogarithm function, and
+    /// is defined as:
+    ///
+    /// $ Li_2(x) = \int^x_1 \frac{ln(t)}{t - 1} du
+    ///
+    /// Note, this implies that the domain has been shifted by 1 from the
+    /// standard definition (as per wikipedia) of:
+    ///
+    /// $ Li_2(x) = - \int^x_0 \frac{ ln(1 - t) }{ t } dt
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// Computes the integral for x >= 0.  A rational approximation gives the
+    /// integral in the interval (0.5, 1.5).  Transformation formulas for 1/x
+    /// and 1-x are employed outside the basic expansion range.
+    ///
+    /// ACCURACY(Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :---: | :--: | :--: | :--: | :--: | :--: |
+    /// | IEEE  | 0,4 | 30000 | 3.9e-15 | 5.4e-16 |
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::spence;
+    /// let x = 0.1f64;
+    /// spence(x);
+    /// ```
+    pub fn spence(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::spence(x) }
+    }
+
+    /// Function to accurately compute `cos(x) - 1` for small x
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::cosm1;
+    /// let x = 0.1f64;
+    /// cosm1(x);
+    /// ```
+    pub fn cosm1(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::cosm1(x) }
+    }
+
+    /// Function to accurately compute sine and cosine integrals
+    ///
+    /// The sine integral is defined as:
+    ///
+    /// $ Si(x) = \int_0^{\infty} \frac{ sin(t) }{t} dt $
+    ///
+    /// and the cosine integral is defined as:
+    ///
+    /// $ Ci(x) = -\int_x^{\infty} \frac{ cos(t) }{t} dt $
+    ///
+    /// which reduces to:
+    ///
+    /// $ Ci(x) = \gamma + ln(x) + \int_0^x \frac{cos(t) - 1}{t} dt $
+    ///
+    /// where $\gamma$ is the euler constant.
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// The integrals are approximated by rational functions.
+    /// For x > 8 auxiliary functions f(x) and g(x) are employed
+    /// such that
+    ///
+    /// Ci(x) = f(x) sin(x) - g(x) cos(x)
+    /// Si(x) = pi/2 - f(x) cos(x) - g(x) sin(x)
+    ///
+    /// ACCURACY(Absolute error, except relative when > 1):
+    ///
+    /// | arithmetic | Function | domain | # trials | peak | rms |
+    /// | :---: | :--: | :--: | :--: | :--: | :--: | :--: |
+    /// | IEEE | Si | 0,50 | 30000 | 4.4e-16 | 7.3e-17 |
+    /// | IEEE | Ci | 0,50 | 30000 | 6.9e-16 | 5.1e-17 |
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    /// * `Si`: A mutable double precision number that will return the sine
+    ///         integral value
+    /// * `Ci`: A mutable double precision number that will return the cosine
+    ///         integral value
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::sici;
+    /// let x = 0.1f64;
+    /// let mut si = 0.0_f64;
+    /// let mut ci = 0.0_f64;
+    /// let mut code = 0.0_f64;
+    /// code = sici(0.5_f64, &mut si, &mut ci);
+    /// ```
+    pub fn sici(x: f64, si: &mut f64, ci: &mut f64) -> f64 {
+        unsafe { unsafe_cephes_double::sici(x, si, ci) }
+    }
+
+    /// Function to accurately compute hyperbolic sine and cosine integrals
+    ///
+    /// The hyperbolic sine integral is defined as:
+    ///
+    /// $ Shi(x) = \int_0^{\infty} \frac{ sinh(t) }{t} dt $
+    ///
+    /// and the hyperbolic cosine integral is defined as:
+    ///
+    /// $ Chi(x) = -\int_x^{\infty} \frac{ cosh(t) }{t} dt $
+    ///
+    /// which reduces to:
+    ///
+    /// $ Chi(x) = \gamma + ln(x) + \int_0^x \frac{cosh(t) - 1}{t} dt $
+    ///
+    /// where $\gamma$ is the euler constant.
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// The integrals are approximated by rational functions.
+    /// For x > 8 auxiliary functions f(x) and g(x) are employed
+    /// such that
+    ///
+    /// Ci(x) = f(x) sin(x) - g(x) cos(x)
+    /// Si(x) = pi/2 - f(x) cos(x) - g(x) sin(x)
+    ///
+    /// ACCURACY(Relative error)):
+    ///
+    /// | arithmetic | Function | domain | # trials | peak | rms |
+    /// | :---: | :--: | :--: | :--: | :--: | :--: | :--: |
+    /// | IEEE | Shi | 0,88 | 30000 | 6.9-16 | 1.6e-16 |
+    ///
+    /// ACCURACY(Absolute error, except relative when |Chi| > 1):
+    ///
+    /// | arithmetic | Function | domain | # trials | peak | rms |
+    /// | :---: | :--: | :--: | :--: | :--: | :--: | :--: |
+    /// | IEEE | Chi | 0,88 | 30000 | 8.4e-16 | 1.4e-16 |
+    ///
+    /// # Arguments
+    /// * `x`: A double precision number
+    /// * `Shi`: A mutable double precision number that will return the
+    ///          hyperbolic sine integral value
+    /// * `Chi`: A mutable double precision number that will return the
+    ///          hyperbolic cosine integral value
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::shichi;
+    /// let x = 0.1f64;
+    /// let mut shi = 0.0_f64;
+    /// let mut chi = 0.0_f64;
+    /// shichi(0.5_f64, &mut shi, &mut chi);
+    /// ```
+    pub fn shichi(x: f64, chi: &mut f64, shi: &mut f64){
+        unsafe { unsafe_cephes_double::shichi(x, chi, shi) }
+    }
+
+    /// Function to compute the beta function.
+    ///
+    /// The beta function is given by:
+    ///
+    /// $B(a, b) = \int_0^1 t^{a - 1} ( 1 - t )^{b - 1} dt $
+    ///
+    /// which simplifies to
+    ///
+    /// $ B(a, b) = \frac{ \Gamma(a) \Gamma(b)}{ \Gamma(a + b) } $
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// For large arguments the logarithm of the function is
+    /// evaluated using lgam(), then exponentiated.
+    ///
+    /// ACCURACY (Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :------: | :--: | :-: |
+    /// | IEEE       | 0,30   | 30000    | 8.1e-14 | 1.1e-14 |
+    ///
+    /// ERROR MESSAGES:
+    ///
+    /// | message   | condition | value returned |
+    /// | :-------: | :--------: | :----------: |
+    /// | beta overflow | log(beta) > MAXLOG | 0.0 |
+    /// | beta overflow | a or b <0 integer      | 0.0 |
+    ///
+    /// # Arguments
+    /// * `a`: A double precision parameter, assumed to be greater than 0
+    /// * `b`: A double precision parameter, assumed to be greater than 0
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::beta;
+    /// let a = 0.1f64;
+    /// let b = 0.2f64;
+    /// beta(a, b);
+    /// ```
+    pub fn beta(a: f64, b: f64) -> f64 {
+        unsafe { unsafe_cephes_double::beta(a, b) }
+    }
+
+    /// Function to compute the regularized incomplete beta function.
+    ///
+    /// The regularized incomplete beta function is given by:
+    ///
+    /// $I_x(a, b) = \frac{1}{B(a, b)} \int_0^x t^{a - 1} ( 1 - t )^{b - 1} dt $
+    ///
+    /// and for $x = 1$, the regularized incomplete beta function evaluates to
+    /// exactly 1. Note, $ 1 - I_x(a, b) = I_{1 - x}(a, b)$.
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// The integral is evaluated by a continued fraction expansion
+    /// or, when b*x is small, by a power series.
+    ///
+    /// ACCURACY (Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :------: | :--: | :-: |
+    /// | IEEE       | 0,5    | 10000    | 6.9e-15 | 4.5e-16 |
+    /// | IEEE | 0,85 | 250000 | 2.2e-13 | 1.7e-14 |
+    /// | IEEE | 0,1000   |  30000  |  5.3e-12 | 6.3e-13 |
+    /// | IEEE | 0,10000  | 250000  |  9.3e-11 | 7.1e-12 |
+    /// | IEEE | 0,100000 |  10000  |  8.7e-10 | 4.8e-11 |
+    ///
+    /// ERROR MESSAGES:
+    ///
+    /// | message   | condition | value returned |
+    /// | :-------: | :--------: | :----------: |
+    /// | incbet domain | x<0, x>1 | 0.0 |
+    /// | incbet underflow | - | 0.0 |
+    ///
+    /// # Arguments
+    /// * `a`: A double precision parameter, assumed to be greater than 0
+    /// * `b`: A double precision parameter, assumed to be greater than 0
+    /// * `x`: A double precision parameter, assumed to be between 0 and 1
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_double::incbet;
+    /// let a = 0.1f64;
+    /// let b = 0.2f64;
+    /// incbet(a, b, 0.5f64);
+    /// ```
+    pub fn incbet(a: f64, b: f64, x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::incbet(a, b, x) }
+    }
+
+    /// Inverse of incomplete beta integral.
+    pub fn incbi(a: f64, b: f64, y: f64) -> f64 {
+        unsafe { unsafe_cephes_double::incbi(a, b, y) }
+    }
+
+    /// Gamma function.
+    pub fn gamma(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::gamma(x) }
+    }
+
+    /// Reciprocal gamma function.
+    pub fn rgamma(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::rgamma(x) }
+    }
+
+    /// Natural logarithm of gamma function.
+    pub fn lgam(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::lgam(x) }
+    }
+
+    /// Regularized incomplete gamma integral.
+    pub fn igam(a: f64, x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::igam(a, x) }
+    }
+
+    /// Complemented incomplete gamma integral.
+    pub fn igamc(a: f64, x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::igamc(a, x) }
+    }
+
+    /// Inverse of complemented incomplete gamma integral.
+    pub fn igami(a: f64, p: f64) -> f64 {
+        unsafe { unsafe_cephes_double::igami(a, p) }
+    }
+
+    /// Psi (digamma) function.
+    pub fn psi(x: f64) -> f64 {
+        unsafe { unsafe_cephes_double::psi(x) }
+    }
+
+    /// Factorial function.
+    pub fn fac(i: i32) -> f64 {
+        unsafe { unsafe_cephes_double::fac(i) }
+    }
 }
 
 // single precision
