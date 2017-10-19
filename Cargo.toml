@@ -2,7 +2,7 @@
 name = "special-fun"
 description = "Special functions for Rust by binding to the Cephes library."
 keywords = ["float", "single", "double"]
-categories = ["Science"]
+categories = ["science"]
 version = "0.1.6"
 authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
 repository = "https://github.com/vks/special-fun"
