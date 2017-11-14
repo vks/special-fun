@@ -11,7 +11,8 @@ fn build(dir: &str, files: &str) {
         build.file(path);
     }
     build.flag("-Wall");
-    build.flag("-fno-builtin");
+    build.flag_if_supported("-fno-builtin");
+    build.flag_if_supported("/Oi-");
     build.compile(dir);
 }
 
