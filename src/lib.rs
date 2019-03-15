@@ -2,7 +2,10 @@
 
 use core::ops::{Add, Sub};
 
-// double precision
+/// Low-level bindings to double-precision Cephes functions.
+///
+/// This provides access to the C function implemented in Cephes for maximum
+/// flexibility.
 #[allow(dead_code)]
 pub mod unsafe_cephes_double {
     extern "C" {
@@ -268,6 +271,9 @@ pub mod unsafe_cephes_double {
     }
 }
 
+/// High-level bindings to double-precision Cephes functions.
+///
+/// This provides safe access to a subset of the Cephes functions.
 pub mod cephes_double {
     use unsafe_cephes_double;
 
@@ -729,271 +735,708 @@ pub mod cephes_double {
     }
 }
 
-// single precision
+/// Low-level bindings to single-precision Cephes functions.
+///
+/// This provides access to the C function implemented in Cephes for maximum
+/// flexibility. Note that Cephes implements less functions for single than for
+/// double precision.
 #[allow(dead_code)]
-extern "C" {
-    // Floating point numeric utilities
-    /// Round to nearest or event integer valued f32.
-    fn roundf(x: f32) -> f32;
-    /// Largest integer less than or equal to x.
-    fn floorf(x: f32) -> f32;
-    /// Smallest integer greater than or equal to x.
-    fn ceilf(x: f32) -> f32;
-    /// Return the significand between 0.5 and 1. Write exponent to expnt.
-    /// x = y * 2**expn
-    fn frexpf(x: f32, expnt: &mut i32) -> f32;
-    /// Multiply x by 2**n.
-    fn ldexpf(x: f32, n: i32) -> f32;
-    /// Absolute value.
-    fn fabsf(x: f32) -> f32;
-    /// Return 1 if the sign bit of x is 1, else 0.
-    fn signbitf(x: f32) -> i32;
-    /// Return 1 if x is NaN, else 0.
-    fn isnanf(x: f32) -> i32;
-    /// Return 1 if x is finite, else 0.
-    fn isfinitef(x: f32) -> i32;
+pub mod unsafe_cephes_single {
+    extern "C" {
+        // Floating point numeric utilities
+        /// Round to nearest or event integer valued f32.
+        pub fn roundf(x: f32) -> f32;
+        /// Largest integer less than or equal to x.
+        pub fn floorf(x: f32) -> f32;
+        /// Smallest integer greater than or equal to x.
+        pub fn ceilf(x: f32) -> f32;
+        /// Return the significand between 0.5 and 1. Write exponent to expnt.
+        /// x = y * 2**expn
+        pub fn frexpf(x: f32, expnt: &mut i32) -> f32;
+        /// Multiply x by 2**n.
+        pub fn ldexpf(x: f32, n: i32) -> f32;
+        /// Absolute value.
+        pub fn fabsf(x: f32) -> f32;
+        /// Return 1 if the sign bit of x is 1, else 0.
+        pub fn signbitf(x: f32) -> i32;
+        /// Return 1 if x is NaN, else 0.
+        pub fn isnanf(x: f32) -> i32;
+        /// Return 1 if x is finite, else 0.
+        pub fn isfinitef(x: f32) -> i32;
 
-    // Roots
-    /// Cube root.
-    fn cbrtf(x: f32) -> f32;
-    /// Square root.
-    fn sqrtf(x: f32) -> f32;
-    /// Integer square root.
-    fn lsqrtf(x: i64) -> i64;
+        // Roots
+        /// Cube root.
+        pub fn cbrtf(x: f32) -> f32;
+        /// Square root.
+        pub fn sqrtf(x: f32) -> f32;
+        /// Integer square root.
+        pub fn lsqrtf(x: i64) -> i64;
 
-    // Exponential functions
-    /// Exponential function.
-    fn expf(x: f32) -> f32;
-    /// Base 10 exponential function.
-    fn exp10f(x: f32) -> f32;
-    /// Base 2 exponential function.
-    fn exp2f(x: f32) -> f32;
-    /// Compute accurately exponential of squared argument.
-    fn expm1f(x: f32) -> f32;
-    /// Compute accurately exp(x) - 1 for x close to 0.
-    fn expx2f(x: f32, sign: i32) -> f32;
-    /// Exponential integral.
-    fn eif(x: f32) -> f32;
-    /// Error function.
-    fn erff(x: f32) -> f32;
-    /// Complementary error function.
-    fn erfcf(x: f32) -> f32;
-    /// Power function.
-    fn powf(x: f32, y: f32) -> f32;
-    /// Integer power function.
-    fn powif(x: f32, n: i32) -> f32;
+        // Exponential functions
+        /// Exponential function.
+        pub fn expf(x: f32) -> f32;
+        /// Base 10 exponential function.
+        pub fn exp10f(x: f32) -> f32;
+        /// Base 2 exponential function.
+        pub fn exp2f(x: f32) -> f32;
+        /// Compute accurately exponential of squared argument.
+        pub fn expm1f(x: f32) -> f32;
+        /// Compute accurately exp(x) - 1 for x close to 0.
+        pub fn expx2f(x: f32, sign: i32) -> f32;
+        /// Error function.
+        pub fn erff(x: f32) -> f32;
+        /// Complementary error function.
+        pub fn erfcf(x: f32) -> f32;
+        /// Power function.
+        pub fn powf(x: f32, y: f32) -> f32;
+        /// Integer power function.
+        pub fn powif(x: f32, n: i32) -> f32;
 
-    // Logarithmic functions
-    /// Natural logarithm.
-    fn logf(x: f32) -> f32;
-    /// Common logarithm.
-    fn log10f(x: f32) -> f32;
-    /// Base 2 logarithm.
-    fn log2f(x: f32) -> f32;
-    /// Compute accurately log(1 + x) for x close to 0.
-    fn log1pf(x: f32) -> f32;
-    /// Dilogarithm (Spence's function).
-    fn spencef(x: f32) -> f32;
+        // Logarithmic functions
+        /// Natural logarithm.
+        pub fn logf(x: f32) -> f32;
+        /// Common logarithm.
+        pub fn log10f(x: f32) -> f32;
+        /// Base 2 logarithm.
+        pub fn log2f(x: f32) -> f32;
+        /// Compute accurately log(1 + x) for x close to 0.
+        pub fn log1pf(x: f32) -> f32;
+        /// Dilogarithm (Spence's function).
+        pub fn spencef(x: f32) -> f32;
 
-    // Trigonometric functions
-    /// Circular sine.
-    fn sinf(x: f32) -> f32;
-    /// Circular cosine.
-    fn cosf(x: f32) -> f32;
-    /// Circular tangent.
-    fn tanf(x: f32) -> f32;
-    /// Inverse circular sine.
-    fn asinf(x: f32) -> f32;
-    /// Inverse circular cosine.
-    fn acosf(x: f32) -> f32;
-    /// Inverse circular tangent.
-    fn atanf(x: f32) -> f32;
-    /// Quadrant-correct inverse circular tangent.
-    fn atan2f(y: f32, x: f32) -> f32;
-    /// Compute accurately cos(x) - 1 for x close to 0.
-    fn cosm1f(x: f32) -> f32;
-    /// Sine and cosine integrals.
-    fn sicif(x: f32, si: &mut f32, ci: &mut f32) -> f32;
+        // Trigonometric functions
+        /// Circular sine.
+        pub fn sinf(x: f32) -> f32;
+        /// Circular cosine.
+        pub fn cosf(x: f32) -> f32;
+        /// Circular tangent.
+        pub fn tanf(x: f32) -> f32;
+        /// Inverse circular sine.
+        pub fn asinf(x: f32) -> f32;
+        /// Inverse circular cosine.
+        pub fn acosf(x: f32) -> f32;
+        /// Inverse circular tangent.
+        pub fn atanf(x: f32) -> f32;
+        /// Quadrant-correct inverse circular tangent.
+        pub fn atan2f(y: f32, x: f32) -> f32;
+        /// Sine and cosine integrals.
+        pub fn sicif(x: f32, si: &mut f32, ci: &mut f32) -> f32;
 
-    // Hyperbolic functions
-    /// Hyperbolic sine.
-    fn sinhf(x: f32) -> f32;
-    /// Hyperbolic cosine.
-    fn coshf(x: f32) -> f32;
-    /// Hyperbolic tangent.
-    fn tanhf(x: f32) -> f32;
-    /// Inverse hyperbolic sine.
-    fn asinhf(x: f32) -> f32;
-    /// Inverse hyperbolic cosine.
-    fn acoshf(x: f32) -> f32;
-    /// Inverse hyperbolic tangent.
-    fn atanhf(x: f32) -> f32;
-    /// Hyperbolic sine and cosine integrals.
-    fn shichif(x: f32, chi: &mut f32, shi: &mut f32);
+        // Hyperbolic functions
+        /// Hyperbolic sine.
+        pub fn sinhf(x: f32) -> f32;
+        /// Hyperbolic cosine.
+        pub fn coshf(x: f32) -> f32;
+        /// Hyperbolic tangent.
+        pub fn tanhf(x: f32) -> f32;
+        /// Inverse hyperbolic sine.
+        pub fn asinhf(x: f32) -> f32;
+        /// Inverse hyperbolic cosine.
+        pub fn acoshf(x: f32) -> f32;
+        /// Inverse hyperbolic tangent.
+        pub fn atanhf(x: f32) -> f32;
+        /// Hyperbolic sine and cosine integrals.
+        pub fn shichif(x: f32, chi: &mut f32, shi: &mut f32);
 
-    // Beta functions
-    /// Beta function.
-    fn betaf(a: f32, b: f32) -> f32;
-    /// Regularized incomplete beta function.
-    fn incbetf(a: f32, b: f32, x: f32) -> f32;
+        // Beta functions
+        /// Beta function.
+        pub fn betaf(a: f32, b: f32) -> f32;
+        /// Regularized incomplete beta function.
+        pub fn incbetf(a: f32, b: f32, x: f32) -> f32;
+        /// Inverse of incomplete beta integral.
+        pub fn incbif(a: f32, b: f32, y: f32) -> f32;
+
+        // Gamma functions
+        /// Gamma function.
+        pub fn gammaf(x: f32) -> f32;
+        /// Reciprocal gamma function.
+        pub fn rgammaf(x: f32) -> f32;
+        /// Natural logarithm of gamma function.
+        pub fn lgamf(x: f32) -> f32;
+        /// Regularized incomplete gamma integral.
+        pub fn igamf(a: f32, x: f32) -> f32;
+        /// Complemented incomplete gamma integral.
+        pub fn igamcf(a: f32, x: f32) -> f32;
+        /// Inverse of complemented incomplete gamma integral.
+        pub fn igamif(a: f32, p: f32) -> f32;
+        /// Psi (digamma) function.
+        pub fn psif(x: f32) -> f32;
+        /// Factorial function.
+        pub fn facf(i: i32) -> f32;
+
+        // Bessel functions
+        /// Bessel function of order zero.
+        pub fn j0f(x: f32) -> f32;
+        /// Bessel function of order one.
+        pub fn j1f(x: f32) -> f32;
+        /// Bessel function of integer order.
+        pub fn jnf(n: i32, x: f32) -> f32;
+        /// Bessel function of real order.
+        pub fn jvf(n: f32, x: f32) -> f32;
+
+        /// Bessel function of the second kind, order zero.
+        pub fn y0f(x: f32) -> f32;
+        /// Bessel function of the second kind, order one.
+        pub fn y1f(x: f32) -> f32;
+        /// Bessel function of the second kind, integer order.
+        pub fn ynf(n: i32, x: f32) -> f32;
+        /// Bessel function of the second kind, real order.
+        pub fn yvf(v: f32, x: f32) -> f32;
+
+        /// Modified Bessel function of order zero.
+        pub fn i0f(x: f32) -> f32;
+        /// Modified Bessel function of order zero, exponentially scaled.
+        pub fn i0ef(x: f32) -> f32;
+        /// Modified Bessel function of order one.
+        pub fn i1f(x: f32) -> f32;
+        /// Modified Bessel function of order one, exponentially scaled.
+        pub fn i1ef(x: f32) -> f32;
+        /// Modified Bessel function of real order.
+        pub fn ivf(v: f32, x: f32) -> f32;
+
+        /// Modified Bessel function of the third kind, order zero.
+        pub fn k0f(x: f32) -> f32;
+        /// Modified Bessel function of the third kind, order zero,
+        /// exponentially scaled.
+        pub fn k0ef(x: f32) -> f32;
+        /// Modified Bessel function of the third kind, order one.
+        pub fn k1f(x: f32) -> f32;
+        /// Modified Bessel function of the third kind, order one,
+        /// exponentially scaled.
+        pub fn k1ef(x: f32) -> f32;
+        /// Modified Bessel function of the third kind, integer order.
+        pub fn knf(n: i32, x: f32) -> f32;
+
+        // Elliptic functions
+        /// Incomplete elliptic integral of the first kind.
+        pub fn ellikf(phi: f32, m: f32) -> f32;
+        /// Incomplete elliptic integral of the second kind.
+        pub fn ellief(phi: f32, m: f32) -> f32;
+        /// Complete elliptic integral of the first kind.
+        pub fn ellpkf(m1: f32) -> f32;
+        /// Complete elliptic integral of the second kind.
+        pub fn ellpef(m1: f32) -> f32;
+        /// Jacobian elliptic function.
+        pub fn ellpjf(u: f32, m: f32, sn: &mut f32, cn: &mut f32, dn: &mut f32, phi: &mut f32) -> i32;
+
+        // Hypergeometric functions
+        /// Confluent hypergeometric function 1F1.
+        pub fn hypergf(a: f32, b: f32, x: f32) -> f32;
+        /// Hypergeometric function 1F2.
+        pub fn onef2f(a: f32, b: f32, c: f32, x: f32, err: &mut f32) -> f32;
+        /// Gauss hypergeometric function 2F1.
+        pub fn hyp2f1f(a: f32, b: f32, c: f32, x: f32) -> f32;
+        /// Hypergeometric function 3F0.
+        pub fn threef0f(a: f32, b: f32, c: f32, x: f32, err: &mut f32) -> f32;
+
+        // Distributions
+        /// Binomial distribution.
+        pub fn bdtrf(k: i32, n: i32, p: f32) -> f32;
+        /// Complemented binomial distribution.
+        pub fn bdtrcf(k: i32, n: i32, p: f32) -> f32;
+        /// Inverse of binomial distribution.
+        pub fn bdtrif(k: i32, n: i32, y: f32) -> f32;
+
+        /// Negative binomial distribution.
+        pub fn nbdtrf(k: i32, n: i32, p: f32) -> f32;
+        /// Complemented negative binomial distribution.
+        pub fn nbdtrcf(k: i32, n: i32, p: f32) -> f32;
+        /// Inverse of negative binomial distribution.
+        pub fn nbdtrif(k: i32, n: i32, p: f32) -> f32;
+
+        /// Beta distribution.
+        pub fn btdtrf(a: f32, b: f32, x: f32) -> f32;
+
+        /// Chi-square distribution.
+        pub fn chdtrf(df: f32, x: f32) -> f32;
+        /// Complemented chi-square distribution.
+        pub fn chdtrcf(v: f32, x: f32) -> f32;
+        /// Inverse of complemented chi-square distribution.
+        pub fn chdtrif(df: f32, y: f32) -> f32;
+
+        /// F distribution.
+        pub fn fdtrf(df1: i32, df2: i32, x: f32) -> f32;
+        /// Complemented F distribution.
+        pub fn fdtrcf(df1: i32, df2: i32, x: f32) -> f32;
+        /// Inverse of complemented F distribution.
+        pub fn fdtrif(df1: i32, df2: i32, p: f32) -> f32;
+
+        /// Gamma distribution.
+        pub fn gdtrf(a: f32, b: f32, x: f32) -> f32;
+        /// Complemented gamma distribution.
+        pub fn gdtrcf(a: f32, b: f32, x: f32) -> f32;
+
+        /// Normal distribution.
+        pub fn ndtrf(x: f32) -> f32;
+        /// Inverse of normal distribution.
+        pub fn ndtrif(y: f32) -> f32;
+
+        /// Poisson distribution.
+        pub fn pdtrf(k: i32, m: f32) -> f32;
+        /// Complemented Poisson distribution.
+        pub fn pdtrcf(k: i32, m: f32) -> f32;
+        /// Inverse of Poisson distribution.
+        pub fn pdtrif(k: i32, y: f32) -> f32;
+
+        /// Student's t distribution.
+        pub fn stdtrf(k: i16, t: f32) -> f32;
+        /// Inverse of Student's t distribution.
+        pub fn stdtrif(k: i32, p: f32) -> f32;
+
+        // Misc special functions
+        /// Airy function.
+        pub fn airyf(x: f32, ai: &mut f32, aip: &mut f32, bi: &mut f32, bip: &mut f32) -> i32;
+        /// Dawson's integral.
+        pub fn dawsnf(x: f32) -> f32;
+        /// Fresnel integral.
+        pub fn fresnlf(x: f32, s: &mut f32, c: &mut f32);
+        /// Integral of Planck's black body radiation formula.
+        pub fn planckif(lambda: f32, temperature: f32) -> f32;
+        /// Struve function.
+        pub fn struvef(v: f32, x: f32) -> f32;
+        /// Riemann zeta function.
+        pub fn zetacf(x: f32) -> f32;
+        /// Riemann zeta function of two arguments.
+        pub fn zetaf(x: f32, q: f32) -> f32;
+    }
+}
+
+/// High-level bindings to single-precision Cephes functions.
+///
+/// This provides safe access to a subset of the Cephes functions. Note that
+/// Cephes implements less functions for single than for double precision.
+pub mod cephes_single {
+    use unsafe_cephes_single;
+
+    /// Function to compute the base-10 exponential of x
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// Returns 10 raised to the x power.
+    ///
+    /// Range reduction is accomplished by expressing the argument
+    /// as 10^x = 2^n 10^f, with |f| < 0.5 log10(2).
+    /// The Pade' form
+    ///
+    /// 10^x = 1 + 2x P( x^2)/( Q( x^2 ) - P( x^2 ) )
+    ///
+    /// is used to approximate 10^f.
+    ///
+    /// ACCURACY (Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :-------: | :---: | :--: |
+    /// | IEEE       | -38,+38 | 100000 | 9.8e-8 | 2.8e-8 |
+    ///
+    /// ERROR MESSAGES:
+    ///
+    /// | message | condition | value returned |
+    /// | :-----: | :-------: | :------------: |
+    /// | exp10 underflow | x < -MAXL10 | 0.0  |
+    /// | exp10 overflow | x > MAXL10 | MAXNUM |
+    ///
+    /// IEEE single arithmetic: MAXL10 = 38.230809449325611792.
+    ///
+    ///
+    /// # Arguments
+    /// * `x`: A single precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::exp10;
+    /// let x = 1.0f32;
+    /// exp10(x);
+    /// ```
+    pub fn exp10(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::exp10f(x) }
+    }
+
+    /// Function to accurately compute `exp(x) - 1` for small x
+    ///
+    /// # Arguments
+    /// * `x`: A single precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::expm1;
+    /// let x = 1.0f32;
+    /// expm1(x);
+    /// ```
+    pub fn expm1(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::expm1f(x) }
+    }
+
+    /// Function to accurately compute the exponential of a squared argument
+    ///
+    /// # Original Description from Stephen L. Moshier
+    ///
+    /// Computes y = exp(x*x) while suppressing error amplification
+    /// that would ordinarily arise from the inexactness of the
+    /// exponential argument x*x.
+    ///
+    /// If sign < 0, the result is inverted; i.e., y = exp(-x*x) .
+    ///
+    /// ACCURACY (Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :------: | :--: | :--:|
+    /// | IEEE | -9.4, 9.4 | 10^7 | 1.7e-7 | 4.7e-8 |
+    ///
+    /// # Arguments
+    /// * `x`: A single precision number
+    /// * `sign`: An integer representing the sign of the exponent
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::expx2;
+    /// let x = 1.0f32;
+    /// expx2(x, -1);
+    /// ```
+    pub fn expx2(x: f32, sign: i32) -> f32 {
+        unsafe { unsafe_cephes_single::expx2f(x, sign) }
+    }
+
+    /// Function to accurately compute the error function of x
+    ///
+    /// The error function is given by:
+    ///
+    /// $Erf(x) = \frac{2}{\sqrt{pi}} -\int^{x}_{0} e^{-t^2} dt$
+    ///
+    /// # Arguments
+    /// * `x`: A single precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::erf;
+    /// let x = 1.0f32;
+    /// erf(x);
+    /// ```
+    pub fn erf(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::erff(x) }
+    }
+
+    /// Function to accurately compute the complementary error function of x
+    ///
+    /// The error function is given by:
+    ///
+    /// $Erf(x) = 1 + \frac{2}{\sqrt{pi}} -\int^{x}_{0} e^{-t^2} dt$
+    ///
+    /// # Arguments
+    /// * `x`: A single precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::erfc;
+    /// let x = 1.0f32;
+    /// erfc(x);
+    /// ```
+    pub fn erfc(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::erfcf(x) }
+    }
+
+    /// Function to accurately compute `log(1 + x)`
+    ///
+    /// # Arguments
+    /// * `x`: A single precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::log1p;
+    /// let x = 0.1f32;
+    /// log1p(x);
+    /// ```
+    pub fn log1p(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::log1pf(x) }
+    }
+
+    /// Function to accurately compute the dilogarithm function
+    ///
+    /// Spence's function is a special case of the polylogarithm function, and
+    /// is defined as:
+    ///
+    /// $ Li_2(x) = \int^x_1 \frac{ln(t)}{t - 1} du
+    ///
+    /// Note, this implies that the domain has been shifted by 1 from the
+    /// standard definition (as per wikipedia) of:
+    ///
+    /// $ Li_2(x) = - \int^x_0 \frac{ ln(1 - t) }{ t } dt
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// Computes the integral for x >= 0.  A rational approximation gives the
+    /// integral in the interval (0.5, 1.5).  Transformation formulas for 1/x
+    /// and 1-x are employed outside the basic expansion range.
+    ///
+    /// ACCURACY(Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :---: | :--: | :--: | :--: | :--: | :--: |
+    /// | IEEE  | 0,4 | 30000 | 4.4e-7 | 6.3e-8 |
+    ///
+    /// # Arguments
+    /// * `x`: A single precision number
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::spence;
+    /// let x = 0.1f32;
+    /// spence(x);
+    /// ```
+    pub fn spence(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::spencef(x) }
+    }
+
+    /// Function to accurately compute sine and cosine integrals
+    ///
+    /// The sine integral is defined as:
+    ///
+    /// $ Si(x) = \int_0^{\infty} \frac{ sin(t) }{t} dt $
+    ///
+    /// and the cosine integral is defined as:
+    ///
+    /// $ Ci(x) = -\int_x^{\infty} \frac{ cos(t) }{t} dt $
+    ///
+    /// which reduces to:
+    ///
+    /// $ Ci(x) = \gamma + ln(x) + \int_0^x \frac{cos(t) - 1}{t} dt $
+    ///
+    /// where $\gamma$ is the euler constant.
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// The integrals are approximated by rational functions.
+    /// For x > 8 auxiliary functions f(x) and g(x) are employed
+    /// such that
+    ///
+    /// Ci(x) = f(x) sin(x) - g(x) cos(x)
+    /// Si(x) = pi/2 - f(x) cos(x) - g(x) sin(x)
+    ///
+    /// ACCURACY(Absolute error, except relative when > 1):
+    ///
+    /// | arithmetic | Function | domain | # trials | peak | rms |
+    /// | :---: | :--: | :--: | :--: | :--: | :--: | :--: |
+    /// | IEEE | Si | 0,50 | 30000 | 2.1e-7 | 4.3e-8 |
+    /// | IEEE | Ci | 0,50 | 30000 | 3.9e-7 | 2.2e-8 |
+    ///
+    /// # Arguments
+    /// * `x`: A single precision number
+    /// * `Si`: A mutable single precision number that will return the sine
+    ///         integral value
+    /// * `Ci`: A mutable single precision number that will return the cosine
+    ///         integral value
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::sici;
+    /// let x = 0.1f32;
+    /// let mut si = 0.0_f32;
+    /// let mut ci = 0.0_f32;
+    /// let mut code = 0.0_f32;
+    /// code = sici(0.5_f32, &mut si, &mut ci);
+    /// ```
+    pub fn sici(x: f32, si: &mut f32, ci: &mut f32) -> f32 {
+        unsafe { unsafe_cephes_single::sicif(x, si, ci) }
+    }
+
+    /// Function to accurately compute hyperbolic sine and cosine integrals
+    ///
+    /// The hyperbolic sine integral is defined as:
+    ///
+    /// $ Shi(x) = \int_0^{\infty} \frac{ sinh(t) }{t} dt $
+    ///
+    /// and the hyperbolic cosine integral is defined as:
+    ///
+    /// $ Chi(x) = -\int_x^{\infty} \frac{ cosh(t) }{t} dt $
+    ///
+    /// which reduces to:
+    ///
+    /// $ Chi(x) = \gamma + ln(x) + \int_0^x \frac{cosh(t) - 1}{t} dt $
+    ///
+    /// where $\gamma$ is the euler constant.
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// The integrals are approximated by rational functions.
+    /// For x > 8 auxiliary functions f(x) and g(x) are employed
+    /// such that
+    ///
+    /// Ci(x) = f(x) sin(x) - g(x) cos(x)
+    /// Si(x) = pi/2 - f(x) cos(x) - g(x) sin(x)
+    ///
+    /// ACCURACY(Relative error)):
+    ///
+    /// | arithmetic | Function | domain | # trials | peak | rms |
+    /// | :---: | :--: | :--: | :--: | :--: | :--: | :--: |
+    /// | IEEE | Shi | 0,88 | 30000 | 3.5e-7 | 7.0e-8 |
+    ///
+    /// ACCURACY(Absolute error, except relative when |Chi| > 1):
+    ///
+    /// | arithmetic | Function | domain | # trials | peak | rms |
+    /// | :---: | :--: | :--: | :--: | :--: | :--: | :--: |
+    /// | IEEE | Chi | 0,88 | 30000 | 3.8e-7 | 7.6e-8 |
+    ///
+    /// # Arguments
+    /// * `x`: A single precision number
+    /// * `Shi`: A mutable single precision number that will return the
+    ///          hyperbolic sine integral value
+    /// * `Chi`: A mutable single precision number that will return the
+    ///          hyperbolic cosine integral value
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::shichi;
+    /// let x = 0.1f32;
+    /// let mut shi = 0.0_f32;
+    /// let mut chi = 0.0_f32;
+    /// shichi(0.5_f32, &mut shi, &mut chi);
+    /// ```
+    pub fn shichi(x: f32, chi: &mut f32, shi: &mut f32){
+        unsafe { unsafe_cephes_single::shichif(x, chi, shi) }
+    }
+
+    /// Function to compute the beta function.
+    ///
+    /// The beta function is given by:
+    ///
+    /// $B(a, b) = \int_0^1 t^{a - 1} ( 1 - t )^{b - 1} dt $
+    ///
+    /// which simplifies to
+    ///
+    /// $ B(a, b) = \frac{ \Gamma(a) \Gamma(b)}{ \Gamma(a + b) } $
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// For large arguments the logarithm of the function is
+    /// evaluated using lgam(), then exponentiated.
+    ///
+    /// ACCURACY (Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :------: | :--: | :-: |
+    /// | IEEE       | 0,30   | 10000    | 4.0e-5 | 6.0e-6 |
+    /// | IEEE       | -20,0  | 10000    | 4.9e-3 | 5.4e-5 |
+    ///
+    /// ERROR MESSAGES:
+    ///
+    /// | message   | condition | value returned |
+    /// | :-------: | :--------: | :----------: |
+    /// | beta overflow | log(beta) > MAXLOG | 0.0 |
+    /// | beta overflow | a or b <0 integer      | 0.0 |
+    ///
+    /// # Arguments
+    /// * `a`: A single precision parameter, assumed to be greater than 0
+    /// * `b`: A single precision parameter, assumed to be greater than 0
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::beta;
+    /// let a = 0.1f32;
+    /// let b = 0.2f32;
+    /// beta(a, b);
+    /// ```
+    pub fn beta(a: f32, b: f32) -> f32 {
+        unsafe { unsafe_cephes_single::betaf(a, b) }
+    }
+
+    /// Function to compute the regularized incomplete beta function.
+    ///
+    /// The regularized incomplete beta function is given by:
+    ///
+    /// $I_x(a, b) = \frac{1}{B(a, b)} \int_0^x t^{a - 1} ( 1 - t )^{b - 1} dt $
+    ///
+    /// and for $x = 1$, the regularized incomplete beta function evaluates to
+    /// exactly 1. Note, $ 1 - I_x(a, b) = I_{1 - x}(a, b)$.
+    ///
+    /// # Original Description from Stephen L. Moshier
+    /// The integral is evaluated by a continued fraction expansion
+    /// or, when b*x is small, by a power series.
+    ///
+    /// ACCURACY (Relative error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :------: | :--: | :-: |
+    /// | IEEE       | 0,30   | 10000    | 3.7e-5 | 5.1e-6 |
+    /// | IEEE       | 0,100  | 10000    | 1.7e-4 | 2.5e-5 |
+    ///
+    /// The useful domain for relative error is limited by underflow of the
+    /// single precision exponential function.
+    ///
+    /// ACCURACY (Absolute error):
+    ///
+    /// | arithmetic | domain | # trials | peak | rms |
+    /// | :--------: | :----: | :------: | :--: | :-: |
+    /// | IEEE       | 0,30   | 100000   | 2.2e-5 | 5.1e-6 |
+    /// | IEEE       | 0,100  | 10000    | 6.5e-5 | 3.7e-6 |
+    ///
+    /// Larger errors may occur for extreme ratios of `a` and `b`.
+    ///
+    /// ERROR MESSAGES:
+    ///
+    /// | message   | condition | value returned |
+    /// | :-------: | :--------: | :----------: |
+    /// | incbet domain | x<0, x>1 | 0.0 |
+    ///
+    /// # Arguments
+    /// * `a`: A single precision parameter, assumed to be greater than 0
+    /// * `b`: A single precision parameter, assumed to be greater than 0
+    /// * `x`: A single precision parameter, assumed to be between 0 and 1
+    ///
+    /// # Example
+    /// ```
+    /// use special_fun::cephes_single::incbet;
+    /// let a = 0.1f32;
+    /// let b = 0.2f32;
+    /// incbet(a, b, 0.5f32);
+    /// ```
+    pub fn incbet(a: f32, b: f32, x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::incbetf(a, b, x) }
+    }
+
     /// Inverse of incomplete beta integral.
-    fn incbif(a: f32, b: f32, y: f32) -> f32;
+    pub fn incbi(a: f32, b: f32, y: f32) -> f32 {
+        unsafe { unsafe_cephes_single::incbif(a, b, y) }
+    }
 
-    // Gamma functions
     /// Gamma function.
-    fn gammaf(x: f32) -> f32;
+    pub fn gamma(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::gammaf(x) }
+    }
+
     /// Reciprocal gamma function.
-    fn rgammaf(x: f32) -> f32;
+    pub fn rgamma(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::rgammaf(x) }
+    }
+
     /// Natural logarithm of gamma function.
-    fn lgamf(x: f32) -> f32;
+    pub fn lgam(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::lgamf(x) }
+    }
+
     /// Regularized incomplete gamma integral.
-    fn igamf(a: f32, x: f32) -> f32;
+    pub fn igam(a: f32, x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::igamf(a, x) }
+    }
+
     /// Complemented incomplete gamma integral.
-    fn igamcf(a: f32, x: f32) -> f32;
+    pub fn igamc(a: f32, x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::igamcf(a, x) }
+    }
+
     /// Inverse of complemented incomplete gamma integral.
-    fn igamif(a: f32, p: f32) -> f32;
+    pub fn igami(a: f32, p: f32) -> f32 {
+        unsafe { unsafe_cephes_single::igamif(a, p) }
+    }
+
     /// Psi (digamma) function.
-    fn psif(x: f32) -> f32;
+    pub fn psi(x: f32) -> f32 {
+        unsafe { unsafe_cephes_single::psif(x) }
+    }
+
     /// Factorial function.
-    fn facf(i: i32) -> f32;
-
-    // Bessel functions
-    /// Bessel function of order zero.
-    fn j0f(x: f32) -> f32;
-    /// Bessel function of order one.
-    fn j1f(x: f32) -> f32;
-    /// Bessel function of integer order.
-    fn jnf(n: i32, x: f32) -> f32;
-    /// Bessel function of real order.
-    fn jvf(n: f32, x: f32) -> f32;
-
-    /// Bessel function of the second kind, order zero.
-    fn y0f(x: f32) -> f32;
-    /// Bessel function of the second kind, order one.
-    fn y1f(x: f32) -> f32;
-    /// Bessel function of the second kind, integer order.
-    fn ynf(n: i32, x: f32) -> f32;
-    /// Bessel function of the second kind, real order.
-    fn yvf(v: f32, x: f32) -> f32;
-
-    /// Modified Bessel function of order zero.
-    fn i0f(x: f32) -> f32;
-    /// Modified Bessel function of order zero, exponentially scaled.
-    fn i0ef(x: f32) -> f32;
-    /// Modified Bessel function of order one.
-    fn i1f(x: f32) -> f32;
-    /// Modified Bessel function of order one, exponentially scaled.
-    fn i1ef(x: f32) -> f32;
-    /// Modified Bessel function of real order.
-    fn ivf(v: f32, x: f32) -> f32;
-
-    /// Modified Bessel function of the third kind, order zero.
-    fn k0f(x: f32) -> f32;
-    /// Modified Bessel function of the third kind, order zero,
-    /// exponentially scaled.
-    fn k0ef(x: f32) -> f32;
-    /// Modified Bessel function of the third kind, order one.
-    fn k1f(x: f32) -> f32;
-    /// Modified Bessel function of the third kind, order one,
-    /// exponentially scaled.
-    fn k1ef(x: f32) -> f32;
-    /// Modified Bessel function of the third kind, integer order.
-    fn knf(n: i32, x: f32) -> f32;
-
-    // Elliptic functions
-    /// Incomplete elliptic integral of the first kind.
-    fn ellikf(phi: f32, m: f32) -> f32;
-    /// Incomplete elliptic integral of the second kind.
-    fn ellief(phi: f32, m: f32) -> f32;
-    /// Complete elliptic integral of the first kind.
-    fn ellpkf(m1: f32) -> f32;
-    /// Complete elliptic integral of the second kind.
-    fn ellpef(m1: f32) -> f32;
-    /// Jacobian elliptic function.
-    fn ellpjf(u: f32, m: f32, sn: &mut f32, cn: &mut f32, dn: &mut f32, phi: &mut f32) -> i32;
-
-    // Hypergeometric functions
-    /// Confluent hypergeometric function 1F1.
-    fn hypergf(a: f32, b: f32, x: f32) -> f32;
-    /// Hypergeometric function 1F2.
-    fn onef2f(a: f32, b: f32, c: f32, x: f32, err: &mut f32) -> f32;
-    /// Gauss hypergeometric function 2F1.
-    fn hyp2f1f(a: f32, b: f32, c: f32, x: f32) -> f32;
-    /// Hypergeometric function 3F0.
-    fn threef0f(a: f32, b: f32, c: f32, x: f32, err: &mut f32) -> f32;
-
-    // Distributions
-    /// Binomial distribution.
-    fn bdtrf(k: i32, n: i32, p: f32) -> f32;
-    /// Complemented binomial distribution.
-    fn bdtrcf(k: i32, n: i32, p: f32) -> f32;
-    /// Inverse of binomial distribution.
-    fn bdtrif(k: i32, n: i32, y: f32) -> f32;
-
-    /// Negative binomial distribution.
-    fn nbdtrf(k: i32, n: i32, p: f32) -> f32;
-    /// Complemented negative binomial distribution.
-    fn nbdtrcf(k: i32, n: i32, p: f32) -> f32;
-    /// Inverse of negative binomial distribution.
-    fn nbdtrif(k: i32, n: i32, p: f32) -> f32;
-
-    /// Beta distribution.
-    fn btdtrf(a: f32, b: f32, x: f32) -> f32;
-
-    /// Chi-square distribution.
-    fn chdtrf(df: f32, x: f32) -> f32;
-    /// Complemented chi-square distribution.
-    fn chdtrcf(v: f32, x: f32) -> f32;
-    /// Inverse of complemented chi-square distribution.
-    fn chdtrif(df: f32, y: f32) -> f32;
-
-    /// F distribution.
-    fn fdtrf(df1: i32, df2: i32, x: f32) -> f32;
-    /// Complemented F distribution.
-    fn fdtrcf(df1: i32, df2: i32, x: f32) -> f32;
-    /// Inverse of complemented F distribution.
-    fn fdtrif(df1: i32, df2: i32, p: f32) -> f32;
-
-    /// Gamma distribution.
-    fn gdtrf(a: f32, b: f32, x: f32) -> f32;
-    /// Complemented gamma distribution.
-    fn gdtrcf(a: f32, b: f32, x: f32) -> f32;
-
-    /// Normal distribution.
-    fn ndtrf(x: f32) -> f32;
-    /// Inverse of normal distribution.
-    fn ndtrif(y: f32) -> f32;
-
-    /// Poisson distribution.
-    fn pdtrf(k: i32, m: f32) -> f32;
-    /// Complemented Poisson distribution.
-    fn pdtrcf(k: i32, m: f32) -> f32;
-    /// Inverse of Poisson distribution.
-    fn pdtrif(k: i32, y: f32) -> f32;
-
-    /// Student's t distribution.
-    fn stdtrf(k: i16, t: f32) -> f32;
-    /// Inverse of Student's t distribution.
-    fn stdtrif(k: i32, p: f32) -> f32;
-
-    // Misc special functions
-    /// Airy function.
-    fn airyf(x: f32, ai: &mut f32, aip: &mut f32, bi: &mut f32, bip: &mut f32) -> i32;
-    /// Dawson's integral.
-    fn dawsnf(x: f32) -> f32;
-    /// Fresnel integral.
-    fn fresnlf(x: f32, s: &mut f32, c: &mut f32);
-    /// Integral of Planck's black body radiation formula.
-    fn planckif(lambda: f32, temperature: f32) -> f32;
-    /// Struve function.
-    fn struvef(v: f32, x: f32) -> f32;
-    /// Riemann zeta function.
-    fn zetacf(x: f32) -> f32;
-    /// Riemann zeta function of two arguments.
-    fn zetaf(x: f32, q: f32) -> f32;
+    pub fn fac(i: i32) -> f32 {
+        unsafe { unsafe_cephes_single::facf(i) }
+    }
 }
 
 /// Special functions on primitive floating point numbers.
+///
+/// This provides safe access to a subset of the Cephes functions implemented
+/// for double and single precision.
 pub trait FloatSpecial: Copy + Add<Output=Self> + Sub<Output=Self> {
     /// Beta function.
     fn beta(self, b: Self) -> Self;
@@ -1149,89 +1592,89 @@ impl FloatSpecial for f64 {
 
 impl FloatSpecial for f32 {
     fn beta(self, b: f32) -> f32 {
-        unsafe { betaf(self, b) }
+        unsafe { unsafe_cephes_single::betaf(self, b) }
     }
     fn betainc(self, a: f32, b: f32) -> f32 {
-        unsafe { incbetf(a, b, self) }
+        unsafe { unsafe_cephes_single::incbetf(a, b, self) }
     }
     fn betainc_inv(self, a: f32, b: f32) -> f32 {
-        unsafe { incbif(a, b, self) }
+        unsafe { unsafe_cephes_single::incbif(a, b, self) }
     }
 
     fn factorial(self) -> f32 {
-        unsafe { gammaf(self + 1.0) }
+        unsafe { unsafe_cephes_single::gammaf(self + 1.0) }
     }
     fn gamma(self) -> f32 {
-        unsafe { gammaf(self) }
+        unsafe { unsafe_cephes_single::gammaf(self) }
     }
     fn rgamma(self) -> f32 {
-        unsafe { rgammaf(self) }
+        unsafe { unsafe_cephes_single::rgammaf(self) }
     }
     fn loggamma(self) -> f32 {
-        unsafe { lgamf(self) }
+        unsafe { unsafe_cephes_single::lgamf(self) }
     }
 
     fn gammainc(self, a: f32) -> f32 {
-        unsafe { igamf(a, self) }
+        unsafe { unsafe_cephes_single::igamf(a, self) }
     }
     fn gammac(self, a: f32) -> f32 {
-        unsafe { igamcf(a, self) }
+        unsafe { unsafe_cephes_single::igamcf(a, self) }
     }
     fn gammac_inv(self, a: f32) -> f32 {
-        unsafe { igamif(a, self) }
+        unsafe { unsafe_cephes_single::igamif(a, self) }
     }
 
     fn digamma(self) -> f32 {
-        unsafe { psif(self) }
+        unsafe { unsafe_cephes_single::psif(self) }
     }
 
     fn erf(self) -> f32 {
-        unsafe { erff(self) }
+        unsafe { unsafe_cephes_single::erff(self) }
     }
     fn erfc(self) -> f32 {
-        unsafe { erfcf(self) }
+        unsafe { unsafe_cephes_single::erfcf(self) }
     }
 
     fn hyp1f1(self, a: f32, b: f32) -> f32 {
-        unsafe { hypergf(a, b, self) }
+        unsafe { unsafe_cephes_single::hypergf(a, b, self) }
     }
     fn hyp1f2(self, a: f32, b: f32, c: f32) -> f32 {
         let mut err = 0.0;
-        unsafe { onef2f(a, b, c, self, &mut err) }
+        unsafe { unsafe_cephes_single::onef2f(a, b, c, self, &mut err) }
     }
     fn hyp2f1(self, a: f32, b: f32, c: f32) -> f32 {
-        unsafe { hyp2f1f(a, b, c, self) }
+        unsafe { unsafe_cephes_single::hyp2f1f(a, b, c, self) }
     }
     fn hyp3f0(self, a: f32, b: f32, c: f32) -> f32 {
         let mut err = 0.0;
-        unsafe { threef0f(a, b, c, self, &mut err) }
+        unsafe { unsafe_cephes_single::threef0f(a, b, c, self, &mut err) }
     }
 
     fn norm(self) -> f32 {
-        unsafe { ndtrf(self) }
+        unsafe { unsafe_cephes_single::ndtrf(self) }
     }
     fn norm_inv(self) -> f32 {
-        unsafe { ndtrif(self) }
+        unsafe { unsafe_cephes_single::ndtrif(self) }
     }
 
     fn besselj(self, v: f32) -> f32 {
-        unsafe { jvf(v, self) }
+        unsafe { unsafe_cephes_single::jvf(v, self) }
     }
     fn bessely(self, v: f32) -> f32 {
-        unsafe { yvf(v, self) }
+        unsafe { unsafe_cephes_single::yvf(v, self) }
     }
     fn besseli(self, v: f32) -> f32 {
-        unsafe { ivf(v, self) }
+        unsafe { unsafe_cephes_single::ivf(v, self) }
     }
     fn besselk(self, n: i32) -> f32 {
-        unsafe { knf(n, self) }
+        unsafe { unsafe_cephes_single::knf(n, self) }
     }
 
     fn riemann_zeta(self) -> f32 {
-        unsafe { 1.0 + zetacf(self) }
+        unsafe { 1.0 + unsafe_cephes_single::zetacf(self) }
     }
     fn hurwitz_zeta(self, q: f32) -> f32 {
-        unsafe { zetaf(self, q) }
+        unsafe { unsafe_cephes_single::zetaf(self, q) }
     }
 }
 
