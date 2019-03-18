@@ -14,9 +14,9 @@ LFB0:
 	subq $8,%rsp
 	fstcw (%rsp)
 	fwait
-	movw (%rsp),%rax
-	andw $0xfcff,%rax
-	movw %rax,(%rsp)
+	movw (%rsp),%ax
+	andw $0xfcff,%ax
+	movw %ax,(%rsp)
 	fldcw (%rsp)
 	popq %rax
 	popq %rax
@@ -36,8 +36,8 @@ dprec:
 	andq $0xfcff,%rax
 /* trap on overflow */
 /*	andq $0xfcf7,%rax */
-	orw $0x200,%rax
-	movw %rax,(%rsp)
+	orw $0x200,%ax
+	movw %ax,(%rsp)
 	fldcw (%rsp)
 	popq %rax
 	popq %rax
@@ -52,8 +52,8 @@ ldprec:
 	subq $8,%rsp
 	fstcw (%rsp)
 	fwait
-	movw (%rsp),%rax
-	orw $0x300,%rax
+	movw (%rsp),%ax
+	orw $0x300,%ax
 	movq %rax,(%rsp)
 	fldcw (%rsp)
 	popq %rax
