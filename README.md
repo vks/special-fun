@@ -1,6 +1,6 @@
 # special-fun
 
-[![Status][status-img]][status-url]
+[![Build Status]][actions]
 
 Special functions for Rust by binding to the [Cephes library][1].
 
@@ -47,5 +47,5 @@ additional terms or conditions.
 [1]: http://www.moshier.net/#Cephes
 [2]: https://github.com/stainless-steel/special
 
-[status-img]: https://travis-ci.org/vks/special-fun.svg?branch=master
-[status-url]: https://travis-ci.org/vks/special-fun
+[Build Status]: https://github.com/vks/special-fun/workflows/Tests/badge.svg?event=push
+[actions]: https://github.com/vks/special-fun/actions 
