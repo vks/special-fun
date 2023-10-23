@@ -106,7 +106,7 @@ pub mod unsafe_cephes_double {
         /// Inverse hyperbolic tangent.
         pub fn atanh(x: f64) -> f64;
         /// Hyperbolic sine and cosine integrals.
-        pub fn shichi(x: f64, chi: &mut f64, shi: &mut f64);
+        pub fn shichi(x: f64, chi: &mut f64, shi: &mut f64) -> i32;
 
         // Beta functions
         /// Beta function.
@@ -597,7 +597,7 @@ pub mod cephes_double {
     /// let mut chi = 0.0_f64;
     /// shichi(0.5_f64, &mut shi, &mut chi);
     /// ```
-    pub fn shichi(x: f64, chi: &mut f64, shi: &mut f64){
+    pub fn shichi(x: f64, chi: &mut f64, shi: &mut f64) -> i32{
         unsafe { unsafe_cephes_double::shichi(x, chi, shi) }
     }
 
@@ -836,7 +836,7 @@ pub mod unsafe_cephes_single {
         /// Inverse hyperbolic tangent.
         pub fn atanhf(x: f32) -> f32;
         /// Hyperbolic sine and cosine integrals.
-        pub fn shichif(x: f32, chi: &mut f32, shi: &mut f32);
+        pub fn shichif(x: f32, chi: &mut f32, shi: &mut f32) -> i32;
 
         // Beta functions
         /// Beta function.
@@ -1286,7 +1286,7 @@ pub mod cephes_single {
     /// let mut chi = 0.0_f32;
     /// shichi(0.5_f32, &mut shi, &mut chi);
     /// ```
-    pub fn shichi(x: f32, chi: &mut f32, shi: &mut f32){
+    pub fn shichi(x: f32, chi: &mut f32, shi: &mut f32) -> i32{
         unsafe { unsafe_cephes_single::shichif(x, chi, shi) }
     }
 
