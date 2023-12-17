@@ -90,7 +90,7 @@ pub mod unsafe_cephes_double {
         /// Compute accurately cos(x) - 1 for x close to 0.
         pub fn cosm1(x: f64) -> f64;
         /// Sine and cosine integrals.
-        pub fn sici(x: f64, si: &mut f64, ci: &mut f64) -> f64;
+        pub fn sici(x: f64, si: &mut f64, ci: &mut f64) -> i32;
 
         // Hyperbolic functions
         /// Hyperbolic sine.
@@ -106,7 +106,7 @@ pub mod unsafe_cephes_double {
         /// Inverse hyperbolic tangent.
         pub fn atanh(x: f64) -> f64;
         /// Hyperbolic sine and cosine integrals.
-        pub fn shichi(x: f64, chi: &mut f64, shi: &mut f64);
+        pub fn shichi(x: f64, chi: &mut f64, shi: &mut f64) -> i32;
 
         // Beta functions
         /// Beta function.
@@ -540,10 +540,11 @@ pub mod cephes_double {
     /// let mut si = 0.0_f64;
     /// let mut ci = 0.0_f64;
     /// let mut code = 0.0_f64;
-    /// code = sici(0.5_f64, &mut si, &mut ci);
+    /// sici(0.5_f64, &mut si, &mut ci);
     /// ```
-    pub fn sici(x: f64, si: &mut f64, ci: &mut f64) -> f64 {
-        unsafe { unsafe_cephes_double::sici(x, si, ci) }
+    pub fn sici(x: f64, si: &mut f64, ci: &mut f64) {
+        let code = unsafe { unsafe_cephes_double::sici(x, si, ci) };
+        assert_eq!(code, 0);
     }
 
     /// Function to accurately compute hyperbolic sine and cosine integrals
@@ -598,7 +599,8 @@ pub mod cephes_double {
     /// shichi(0.5_f64, &mut shi, &mut chi);
     /// ```
     pub fn shichi(x: f64, chi: &mut f64, shi: &mut f64){
-        unsafe { unsafe_cephes_double::shichi(x, chi, shi) }
+        let code = unsafe { unsafe_cephes_double::shichi(x, chi, shi) };
+        assert_eq!(code, 0);
     }
 
     /// Function to compute the beta function.
@@ -820,7 +822,7 @@ pub mod unsafe_cephes_single {
         /// Quadrant-correct inverse circular tangent.
         pub fn atan2f(y: f32, x: f32) -> f32;
         /// Sine and cosine integrals.
-        pub fn sicif(x: f32, si: &mut f32, ci: &mut f32) -> f32;
+        pub fn sicif(x: f32, si: &mut f32, ci: &mut f32) -> i32;
 
         // Hyperbolic functions
         /// Hyperbolic sine.
@@ -836,7 +838,7 @@ pub mod unsafe_cephes_single {
         /// Inverse hyperbolic tangent.
         pub fn atanhf(x: f32) -> f32;
         /// Hyperbolic sine and cosine integrals.
-        pub fn shichif(x: f32, chi: &mut f32, shi: &mut f32);
+        pub fn shichif(x: f32, chi: &mut f32, shi: &mut f32) -> i32;
 
         // Beta functions
         /// Beta function.
@@ -1228,11 +1230,11 @@ pub mod cephes_single {
     /// let x = 0.1f32;
     /// let mut si = 0.0_f32;
     /// let mut ci = 0.0_f32;
-    /// let mut code = 0.0_f32;
-    /// code = sici(0.5_f32, &mut si, &mut ci);
+    /// sici(0.5_f32, &mut si, &mut ci);
     /// ```
-    pub fn sici(x: f32, si: &mut f32, ci: &mut f32) -> f32 {
-        unsafe { unsafe_cephes_single::sicif(x, si, ci) }
+    pub fn sici(x: f32, si: &mut f32, ci: &mut f32) {
+        let code = unsafe { unsafe_cephes_single::sicif(x, si, ci) };
+        assert_eq!(code, 0);
     }
 
     /// Function to accurately compute hyperbolic sine and cosine integrals
@@ -1287,7 +1289,8 @@ pub mod cephes_single {
     /// shichi(0.5_f32, &mut shi, &mut chi);
     /// ```
     pub fn shichi(x: f32, chi: &mut f32, shi: &mut f32){
-        unsafe { unsafe_cephes_single::shichif(x, chi, shi) }
+        let code = unsafe { unsafe_cephes_single::shichif(x, chi, shi) };
+        assert_eq!(code, 0);
     }
 
     /// Function to compute the beta function.
