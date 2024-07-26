@@ -18,6 +18,9 @@ The following families of functions currently have Rust bindings for `f32` and
 Cephes implements a lot more functions that are not yet exposed in the Rust
 interface.
 
+⚠️ **Cephes defines some symbols that may conflict with libc, such as `sin` and `cos`.
+Using this crate may overwrite these symbols!**
+
 
 ## Installing
 
