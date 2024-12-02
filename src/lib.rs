@@ -735,6 +735,32 @@ pub mod cephes_double {
     pub fn fac(i: i32) -> f64 {
         unsafe { unsafe_cephes_double::fac(i) }
     }
+
+    // Elliptic functions
+    /// Incomplete elliptic integral of the first kind.
+    pub fn ellik(phi: f64, m: f64) -> f64 {
+        unsafe { unsafe_cephes_double::ellik(phi, m) }
+    }
+
+    /// Incomplete elliptic integral of the second kind.
+    pub fn ellie(phi: f64, m: f64) -> f64 {
+        unsafe { unsafe_cephes_double::ellie(phi, m) }
+    }
+
+    /// Complete elliptic integral of the first kind.
+    pub fn ellpk(m1: f64) -> f64 {
+        unsafe { unsafe_cephes_double::ellpk(m1) }
+    }
+
+    /// Complete elliptic integral of the second kind.
+    pub fn ellpe(m1: f64) -> f64 {
+        unsafe { unsafe_cephes_double::ellpe(m1) }
+    }
+
+    /// Jacobian elliptic function.
+    pub fn ellpj(u: f64, m: f64, sn: &mut f64, cn: &mut f64, dn: &mut f64, phi: &mut f64) -> i32 {
+        unsafe { unsafe_cephes_double::ellpj(u, m, sn, cn, dn, phi) }
+    }
 }
 
 /// Low-level bindings to single-precision Cephes functions.
@@ -1433,6 +1459,32 @@ pub mod cephes_single {
     /// Factorial function.
     pub fn fac(i: i32) -> f32 {
         unsafe { unsafe_cephes_single::facf(i) }
+    }
+
+    // Elliptic functions
+    /// Incomplete elliptic integral of the first kind.
+    pub fn ellik(phi: f32, m: f32) -> f32 {
+        unsafe { unsafe_cephes_single::ellikf(phi, m) }
+    }
+
+    /// Incomplete elliptic integral of the second kind.
+    pub fn ellie(phi: f32, m: f32) -> f32 {
+        unsafe { unsafe_cephes_single::ellief(phi, m) }
+    }
+
+    /// Complete elliptic integral of the first kind.
+    pub fn ellpk(m1: f32) -> f32 {
+        unsafe { unsafe_cephes_single::ellpkf(m1) }
+    }
+
+    /// Complete elliptic integral of the second kind.
+    pub fn ellpe(m1: f32) -> f32 {
+        unsafe { unsafe_cephes_single::ellpef(m1) }
+    }
+
+    /// Jacobian elliptic function.
+    pub fn ellpj(u: f32, m: f32, sn: &mut f32, cn: &mut f32, dn: &mut f32, phi: &mut f32) -> i32 {
+        unsafe { unsafe_cephes_single::ellpjf(u, m, sn, cn, dn, phi) }
     }
 }
 
